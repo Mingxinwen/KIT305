@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Home-->
+        <!--Raffles-->
         <scene sceneID="gqE-ab-cAM">
             <objects>
                 <tableViewController id="HYO-Mr-Lv5" customClass="RaffleUITableViewController" customModule="Raffle" customModuleProvider="target" sceneMemberID="viewController">
@@ -26,7 +26,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="k4h-5c-BqH" userLabel="name">
                                             <rect key="frame" x="20" y="11" width="307" height="29"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -57,6 +57,7 @@
                                     <outlet property="descriptionLable" destination="Pcv-ka-EO0" id="2jg-tJ-47I"/>
                                     <outlet property="nameLable" destination="k4h-5c-BqH" id="Lh3-gJ-yix"/>
                                     <outlet property="priceLable" destination="kMx-NT-X9g" id="xal-c7-lTg"/>
+                                    <segue destination="Ra9-Ad-Kbt" kind="show" identifier="ShowRaffleDetailSegue" id="fvg-lb-Z1C"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -65,11 +66,62 @@
                             <outlet property="delegate" destination="HYO-Mr-Lv5" id="8Fe-4y-8BB"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Home" image="house" catalog="system" id="5SI-V2-qP0"/>
+                    <navigationItem key="navigationItem" title="Raffles" id="uTM-Hx-jzj"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xYC-ZO-cw7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-162.31884057971016" y="445.98214285714283"/>
+            <point key="canvasLocation" x="747.82608695652175" y="445.98214285714283"/>
+        </scene>
+        <!--Raffle Detail View Controller-->
+        <scene sceneID="7R7-p4-JMh">
+            <objects>
+                <viewController id="Ra9-Ad-Kbt" customClass="RaffleDetailViewController" customModule="Raffle" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="G7i-Ab-JcP">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Zr2-ng-wJY" userLabel="name">
+                                <rect key="frame" x="11" y="72" width="383" height="91"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AQq-rS-m4Q">
+                                <rect key="frame" x="273" y="229" width="16" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3MP-CA-Nj6" userLabel="price">
+                                <rect key="frame" x="297" y="230" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RLi-ia-Xrr" userLabel="description">
+                                <rect key="frame" x="20" y="281" width="374" height="98"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="9e2-HL-WEk"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ZeF-58-YwI"/>
+                    <connections>
+                        <outlet property="descriptionLable" destination="RLi-ia-Xrr" id="jF2-Ne-MQu"/>
+                        <outlet property="nameLabel" destination="Zr2-ng-wJY" id="Hxk-WO-rOU"/>
+                        <outlet property="priceLable" destination="3MP-CA-Nj6" id="HRy-8z-odG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2HK-Ao-O7F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="747.82608695652175" y="1125"/>
         </scene>
         <!--Search-->
         <scene sceneID="bBJ-xU-xpB">
@@ -97,7 +149,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="HYO-Mr-Lv5" kind="relationship" relationship="viewControllers" id="hXj-gW-2RG"/>
+                        <segue destination="gHY-22-5sZ" kind="relationship" relationship="viewControllers" id="hXj-gW-2RG"/>
                         <segue destination="q0w-IM-hCN" kind="relationship" relationship="viewControllers" id="oYv-AY-XEG"/>
                         <segue destination="FSK-bu-Nak" kind="relationship" relationship="viewControllers" id="3a0-lb-vBc"/>
                     </connections>
@@ -120,7 +172,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0PI-ee-M5T" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1802.8985507246377" y="445.98214285714283"/>
+            <point key="canvasLocation" x="2713.04347826087" y="445.98214285714283"/>
         </scene>
         <!--Add-->
         <scene sceneID="HMc-lg-xrQ">
@@ -139,7 +191,26 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1zo-E5-gCX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="892.75362318840587" y="445.98214285714283"/>
+            <point key="canvasLocation" x="1802.8985507246377" y="445.98214285714283"/>
+        </scene>
+        <!--Home-->
+        <scene sceneID="Zzi-7E-BmO">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gHY-22-5sZ" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Home" image="house" catalog="system" id="5SI-V2-qP0"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ovj-U3-24W">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="HYO-Mr-Lv5" kind="relationship" relationship="rootViewController" id="Llc-JT-8Qs"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0xV-r7-Rns" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-162.31884057971016" y="445.98214285714283"/>
         </scene>
     </scenes>
     <resources>

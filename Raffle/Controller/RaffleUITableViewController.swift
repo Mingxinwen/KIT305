@@ -47,6 +47,27 @@ class RaffleUITableViewController: UITableViewController {
     
         
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        super.prepare(for: segue, sender: sender)
+        if segue.identifier == "ShowRaffleDetailSegue"
+    {
+    guard let detailViewController = segue.destination as? RaffleDetailViewController else
+    {
+                fatalError("Unexpected destination: \(segue.destination)")
+            }
+            guard let selectedRaffleCell = sender as? RaffleUITableViewCell else
+    {
+                fatalError("Unexpected sender: \( String(describing: sender))")
+            }
+    guard let indexPath = tableView.indexPath(for: selectedRaffleCell) else
+    {
+    fatalError("The selected cell is not being displayed by the table") }
+    let selectedRaffle = raffles[indexPath.row]
+            detailViewController.raffle = selectedRaffle
+        }
+    }
 
     /*
     // Override to support conditional editing of the table view.
