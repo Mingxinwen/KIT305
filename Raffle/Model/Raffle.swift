@@ -1,5 +1,5 @@
 //
-//  Movie.swift (raffle)
+//  Raffle.swift (raffle)
 //  Tutorial5
 //
 //  Created by StarWen on 26/3/20.

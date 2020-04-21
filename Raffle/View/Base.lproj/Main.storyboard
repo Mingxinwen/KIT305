@@ -57,7 +57,7 @@
                                     <outlet property="descriptionLable" destination="Pcv-ka-EO0" id="2jg-tJ-47I"/>
                                     <outlet property="nameLable" destination="k4h-5c-BqH" id="Lh3-gJ-yix"/>
                                     <outlet property="priceLable" destination="kMx-NT-X9g" id="xal-c7-lTg"/>
-                                    <segue destination="Ra9-Ad-Kbt" kind="show" identifier="ShowRaffleDetailSegue" id="fvg-lb-Z1C"/>
+                                    <segue destination="Ra9-Ad-Kbt" kind="showDetail" identifier="ShowRaffleDetailSegue" id="fvg-lb-Z1C"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -66,7 +66,13 @@
                             <outlet property="delegate" destination="HYO-Mr-Lv5" id="8Fe-4y-8BB"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Raffles" id="uTM-Hx-jzj"/>
+                    <navigationItem key="navigationItem" title="Raffles" id="uTM-Hx-jzj">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="txJ-hs-Jez">
+                            <connections>
+                                <action selector="editAction:" destination="HYO-Mr-Lv5" id="JQq-Xe-5uN"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xYC-ZO-cw7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -75,9 +81,10 @@
         <!--Raffle Detail View Controller-->
         <scene sceneID="7R7-p4-JMh">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2HK-Ao-O7F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="Ra9-Ad-Kbt" customClass="RaffleDetailViewController" customModule="Raffle" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="G7i-Ab-JcP">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Zr2-ng-wJY" userLabel="name">
@@ -108,24 +115,33 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a4M-oB-Ei2">
+                                <rect key="frame" x="-5" y="759" width="414" height="49"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <items>
+                                    <tabBarItem title="Tickets" image="list.number" catalog="system" id="GqY-f5-usC"/>
+                                    <tabBarItem title="Draw" image="dollarsign.circle" catalog="system" id="55q-U2-RNQ"/>
+                                    <tabBarItem title="Add Ticket" image="plus" catalog="system" id="Mdp-PG-bYJ"/>
+                                </items>
+                            </tabBar>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="9e2-HL-WEk"/>
                     </view>
-                    <navigationItem key="navigationItem" id="ZeF-58-YwI"/>
                     <connections>
                         <outlet property="descriptionLable" destination="RLi-ia-Xrr" id="jF2-Ne-MQu"/>
                         <outlet property="nameLabel" destination="Zr2-ng-wJY" id="Hxk-WO-rOU"/>
                         <outlet property="priceLable" destination="3MP-CA-Nj6" id="HRy-8z-odG"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2HK-Ao-O7F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="747.82608695652175" y="1125"/>
+            <point key="canvasLocation" x="748" y="1289"/>
         </scene>
         <!--Search-->
         <scene sceneID="bBJ-xU-xpB">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="90F-o1-f1O" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="q0w-IM-hCN" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="e1y-e5-Mss">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -135,13 +151,13 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Search" image="magnifyingglass" catalog="system" id="J5r-VG-P7M"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="90F-o1-f1O" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1097" y="446"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="fke-2S-Imt">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pQL-OV-ILd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tabBarController id="tV1-O1-NKQ" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="m0f-I6-Ysh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
@@ -154,13 +170,13 @@
                         <segue destination="FSK-bu-Nak" kind="relationship" relationship="viewControllers" id="3a0-lb-vBc"/>
                     </connections>
                 </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pQL-OV-ILd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-161" y="-284"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="9Nl-3j-EWF">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0PI-ee-M5T" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="JGc-OM-jOW" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FfG-fQ-TIv">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -170,13 +186,13 @@
                     </view>
                     <navigationItem key="navigationItem" id="8vO-z9-jdI"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0PI-ee-M5T" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2713.04347826087" y="445.98214285714283"/>
         </scene>
         <!--Add-->
         <scene sceneID="HMc-lg-xrQ">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1zo-E5-gCX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="FSK-bu-Nak" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Add" image="plus" catalog="system" springLoaded="YES" id="BX0-Yn-gJs"/>
                     <toolbarItems/>
@@ -189,13 +205,13 @@
                         <segue destination="JGc-OM-jOW" kind="relationship" relationship="rootViewController" id="Voa-DW-Lr9"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1zo-E5-gCX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1802.8985507246377" y="445.98214285714283"/>
         </scene>
         <!--Home-->
         <scene sceneID="Zzi-7E-BmO">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0xV-r7-Rns" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gHY-22-5sZ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Home" image="house" catalog="system" id="5SI-V2-qP0"/>
                     <toolbarItems/>
@@ -208,13 +224,14 @@
                         <segue destination="HYO-Mr-Lv5" kind="relationship" relationship="rootViewController" id="Llc-JT-8Qs"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0xV-r7-Rns" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-162.31884057971016" y="445.98214285714283"/>
         </scene>
     </scenes>
     <resources>
+        <image name="dollarsign.circle" catalog="system" width="64" height="60"/>
         <image name="house" catalog="system" width="64" height="54"/>
+        <image name="list.number" catalog="system" width="64" height="48"/>
         <image name="magnifyingglass" catalog="system" width="64" height="56"/>
         <image name="plus" catalog="system" width="64" height="56"/>
     </resources>

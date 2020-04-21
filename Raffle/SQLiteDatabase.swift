@@ -71,6 +71,7 @@ class SQLiteDatabase
         //INSERT YOUR createTable function calls here
         //e.g. createRaffleTable()
         createRaffleTable()
+        createTicketTable()
 
     }
     private func dropTables()
@@ -78,6 +79,7 @@ class SQLiteDatabase
         //INSERT YOUR dropTable function calls here
         //e.g. dropTable(tableName:"Raffle")
         dropTable(tableName:"Raffle")
+        dropTable(tableName:"Ticket")
     }
     
     /* --------------------------------*/
@@ -292,6 +294,8 @@ class SQLiteDatabase
     /* --------------------------------*/
     /* --- ADD YOUR TABLES ETC HERE ---*/
     /* --------------------------------*/
+    
+//    raffle table
     func createRaffleTable()
     {
               let creatRafflesTableQuery = """
@@ -304,6 +308,20 @@ class SQLiteDatabase
  """
 createTableWithQuery(creatRafflesTableQuery, tableName: "Raffle")
     }
+ 
+//    ticket table
+    func createTicketTable()
+        {
+                  let creatTiketsTableQuery = """
+                  CREATE TABLE Ticket (
+                     ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                     CUSTOMER CHAR(255),
+                     TICKETRAFFLEID INTEGER,
+                     FOREIGN KEY(TICKETRAFFLEID) REFERENCES Raffle(ID)
+            );
+     """
+    createTableWithQuery(creatTiketsTableQuery, tableName: "Tikets")
+        }
     
     func insert(raffle:Raffle)
     {
@@ -315,6 +333,17 @@ createTableWithQuery(creatRafflesTableQuery, tableName: "Raffle")
         sqlite3_bind_int(insertStatement, 2, raffle.price)
         sqlite3_bind_text(insertStatement, 3, NSString(string:raffle.description).utf8String, -1,
         nil)
+        })
+    }
+    
+    func insert(ticket:Ticket)
+    {
+     let insertStatementQuery =
+        "INSERT INTO Ticket (Customer,Ticketraffleid) VALUES (?, ?);"
+        
+        insertWithQuery(insertStatementQuery, bindingFunction: { (insertStatement) in
+        sqlite3_bind_text(insertStatement, 1, NSString(string:ticket.customer).utf8String, -1, nil)
+        sqlite3_bind_int(insertStatement, 2, ticket.ticketraffleid)
         })
     }
     

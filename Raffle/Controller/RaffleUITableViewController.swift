@@ -68,7 +68,26 @@ class RaffleUITableViewController: UITableViewController {
             detailViewController.raffle = selectedRaffle
         }
     }
-
+    
+    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let itemTemMove = raffles[sourceIndexPath.item]
+        raffles.remove(at: sourceIndexPath.item)
+        raffles.insert(itemTemMove, at: destinationIndexPath.item)
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete){
+            raffles.remove(at: indexPath.item)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+    }
+    
+//    edit mode
+    @IBAction func editAction(_ sender: UIBarButtonItem) {
+        self.tableView.isEditing = !self.tableView.isEditing
+        sender.title = (self.tableView.isEditing) ? "Done": "Edit"
+     }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
