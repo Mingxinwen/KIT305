@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tV1-O1-NKQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tV1-O1-NKQ">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -12,7 +12,7 @@
             <objects>
                 <tableViewController id="HYO-Mr-Lv5" customClass="RaffleUITableViewController" customModule="Raffle" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="MU9-Dt-23W">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
@@ -81,7 +81,6 @@
         <!--Raffle Detail View Controller-->
         <scene sceneID="7R7-p4-JMh">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2HK-Ao-O7F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="Ra9-Ad-Kbt" customClass="RaffleDetailViewController" customModule="Raffle" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="G7i-Ab-JcP">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
@@ -125,6 +124,15 @@
                                     <tabBarItem title="Add Ticket" image="plus" catalog="system" id="Mdp-PG-bYJ"/>
                                 </items>
                             </tabBar>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o9S-RA-ngf">
+                                <rect key="frame" x="23" y="37" width="74" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="backward.end.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="BackToView:" destination="Ra9-Ad-Kbt" eventType="touchUpInside" id="qpn-ZI-Tde"/>
+                                    <segue destination="HYO-Mr-Lv5" kind="show" id="0Z7-4y-1dt"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="9e2-HL-WEk"/>
@@ -135,13 +143,13 @@
                         <outlet property="priceLable" destination="3MP-CA-Nj6" id="HRy-8z-odG"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2HK-Ao-O7F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="748" y="1289"/>
+            <point key="canvasLocation" x="747.82608695652175" y="1288.3928571428571"/>
         </scene>
         <!--Search-->
         <scene sceneID="bBJ-xU-xpB">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="90F-o1-f1O" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="q0w-IM-hCN" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="e1y-e5-Mss">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -151,13 +159,13 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Search" image="magnifyingglass" catalog="system" id="J5r-VG-P7M"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="90F-o1-f1O" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1097" y="446"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="fke-2S-Imt">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pQL-OV-ILd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tabBarController id="tV1-O1-NKQ" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="m0f-I6-Ysh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
@@ -170,13 +178,13 @@
                         <segue destination="FSK-bu-Nak" kind="relationship" relationship="viewControllers" id="3a0-lb-vBc"/>
                     </connections>
                 </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pQL-OV-ILd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-161" y="-284"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="9Nl-3j-EWF">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0PI-ee-M5T" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="JGc-OM-jOW" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FfG-fQ-TIv">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -186,13 +194,13 @@
                     </view>
                     <navigationItem key="navigationItem" id="8vO-z9-jdI"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0PI-ee-M5T" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2713.04347826087" y="445.98214285714283"/>
         </scene>
         <!--Add-->
         <scene sceneID="HMc-lg-xrQ">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1zo-E5-gCX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="FSK-bu-Nak" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Add" image="plus" catalog="system" springLoaded="YES" id="BX0-Yn-gJs"/>
                     <toolbarItems/>
@@ -205,13 +213,13 @@
                         <segue destination="JGc-OM-jOW" kind="relationship" relationship="rootViewController" id="Voa-DW-Lr9"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1zo-E5-gCX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1802.8985507246377" y="445.98214285714283"/>
         </scene>
         <!--Home-->
         <scene sceneID="Zzi-7E-BmO">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0xV-r7-Rns" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gHY-22-5sZ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Home" image="house" catalog="system" id="5SI-V2-qP0"/>
                     <toolbarItems/>
@@ -224,15 +232,20 @@
                         <segue destination="HYO-Mr-Lv5" kind="relationship" relationship="rootViewController" id="Llc-JT-8Qs"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0xV-r7-Rns" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-162.31884057971016" y="445.98214285714283"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="0Z7-4y-1dt"/>
+    </inferredMetricsTieBreakers>
     <resources>
-        <image name="dollarsign.circle" catalog="system" width="64" height="60"/>
-        <image name="house" catalog="system" width="64" height="54"/>
-        <image name="list.number" catalog="system" width="64" height="48"/>
-        <image name="magnifyingglass" catalog="system" width="64" height="56"/>
-        <image name="plus" catalog="system" width="64" height="56"/>
+        <image name="backward.end.fill" catalog="system" width="128" height="102"/>
+        <image name="dollarsign.circle" catalog="system" width="128" height="121"/>
+        <image name="house" catalog="system" width="128" height="110"/>
+        <image name="list.number" catalog="system" width="128" height="97"/>
+        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
     </resources>
 </document>

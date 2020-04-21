@@ -15,6 +15,11 @@ class RaffleDetailViewController: UIViewController {
     @IBOutlet var priceLable: UILabel!
     @IBOutlet var descriptionLable: UILabel!
     
+    @IBAction func BackToView(_ sender: UIButton)
+    
+    {
+    }
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
