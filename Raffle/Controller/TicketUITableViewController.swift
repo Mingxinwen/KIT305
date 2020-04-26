@@ -1,47 +1,51 @@
 //
-//  RaffleUITableViewController.swift
+//  TicketUITableTableViewController.swift
 //  Raffle
 //
-//  Created by StarWen on 14/4/20.
+//  Created by Vinh Nguyen on 19/4/20.
 //  Copyright © 2020 StarWen. All rights reserved.
 //
 
 import UIKit
 
-class RaffleUITableViewController: UITableViewController {
+class TicketUITableViewController: UITableViewController {
     
-    var raffles = [Raffle]()
+    var tickets = [Ticket]()
 
-    override func viewDidLoad()
-    {
-         super.viewDidLoad()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+       super.viewDidLoad()
          let database : SQLiteDatabase = SQLiteDatabase(databaseName: "MyDatabase")
-        database.insert(raffle:Raffle(name:"RaffleA", price:23, description:"noteA"))
-        database.insert(raffle:Raffle(name:"RaffleB", price:19, description:"NoteB"))
-        raffles = database.selectAllRaffles()
+        database.insertTicket(ticket:Ticket( ID: 1, Customer_name:"Adams Smitch"))
+        database.insertTicket(ticket:Ticket(ID: 2, Customer_name:"tony Smitch, "))
+        tickets = database.selectAllTicket()
     }
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int
-    {
-    return 1 }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
-    {
-        return raffles.count
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 1
     }
 
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
+        return tickets.count
+    }
+
+    
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "RaffleUITableViewCell", for: indexPath)
+    let cell = tableView.dequeueReusableCell(withIdentifier: "TicketUITableViewCell", for: indexPath)
     
-        let raffle = raffles[indexPath.row]
-        if let raffleCell = cell as? RaffleUITableViewCell
+        let ticket = tickets[indexPath.row]
+        if let ticketleCell = cell as? TicketUITableViewCell
         {
-             raffleCell.nameLable.text = raffle.name
-             raffleCell.priceLable.text = String(raffle.price)
-          //   rafffleCell.numberofticketLabel.text = String(raffle.NumberOfTicket)
+             ticketleCell.CustomerNameLabel.text = ticket.Customer_name
+             ticketleCell.TicketNumberLabel.text = String(ticket.ID)
+          
         }
         
         return cell
@@ -52,26 +56,37 @@ class RaffleUITableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         super.prepare(for: segue, sender: sender)
-        if segue.identifier == "ShowRaffleDetailSegue"
+        if segue.identifier == "ShowTicketDetailSegue"
             
             //"Showdetailsegue"
             //"ShowRaffleDetailSegue"
     {
-    guard let detailViewController = segue.destination as? RaffleDetailViewController else
+    guard let detailViewController = segue.destination as? TicketDetailViewController else
     {
                 fatalError("Unexpected destination: \(segue.destination)")
             }
-            guard let selectedRaffleCell = sender as? RaffleUITableViewCell else
+            guard let selectedTicketCell = sender as? TicketUITableViewCell else
     {
                 fatalError("Unexpected sender: \( String(describing: sender))")
             }
-    guard let indexPath = tableView.indexPath(for: selectedRaffleCell) else
+    guard let indexPath = tableView.indexPath(for: selectedTicketCell) else
     {
     fatalError("The selected cell is not being displayed by the table") }
-    let selectedRaffle = raffles[indexPath.row]
-            detailViewController.raffle = selectedRaffle
+    let selectedTicket = tickets[indexPath.row]
+            detailViewController.ticket = selectedTicket
         }
     }
+
+    
+    /*
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+
+        // Configure the cell...
+
+        return cell
+    }
+    */
 
     /*
     // Override to support conditional editing of the table view.

@@ -15,6 +15,8 @@ class RaffleDetailViewController: UIViewController {
     @IBOutlet var priceLable: UILabel!
     @IBOutlet var descriptionLable: UILabel!
     
+    
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -23,6 +25,7 @@ class RaffleDetailViewController: UIViewController {
             nameLabel.text = displayRaffle.name
             priceLable.text = String(displayRaffle.price)
             descriptionLable.text = displayRaffle.description
+         
     } }
     
 

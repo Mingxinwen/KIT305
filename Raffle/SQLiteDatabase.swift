@@ -26,7 +26,7 @@ class SQLiteDatabase
      
         WARNING: DOING THIS WILL WIPE YOUR DATA, unless you modify how updateDatabase() works.
      */
-    private let DATABASE_VERSION = 7
+    private let DATABASE_VERSION = 14
     
     
     
@@ -71,6 +71,7 @@ class SQLiteDatabase
         //INSERT YOUR createTable function calls here
         //e.g. createRaffleTable()
         createRaffleTable()
+        createTicketTable()
 
     }
     private func dropTables()
@@ -78,6 +79,7 @@ class SQLiteDatabase
         //INSERT YOUR dropTable function calls here
         //e.g. dropTable(tableName:"Raffle")
         dropTable(tableName:"Raffle")
+        dropTable(tableName:"Ticket")
     }
     
     /* --------------------------------*/
@@ -300,23 +302,57 @@ class SQLiteDatabase
                  NAME CHAR(255),
                  PRICE INTEGER,
                  DESCRIPTION CHAR(255)
+                
         );
  """
 createTableWithQuery(creatRafflesTableQuery, tableName: "Raffle")
     }
     
+   // add fuction creatTickectTable
+         func createTicketTable() {
+//             let creatTicketsTableQuery = """
+//                 TICKETID INTEGER PRIMARY KEY AUTOINCREMENT,
+//                 RAFFLEID INTEGER,
+//                 CUSTOMERNAME VARCHAR(255),
+//                 FOREIGN KEY(RAFFLEID) REFERENCES Raffle(ID)
+//                 );
+//             """
+            let creatTicketsTableQuery = """
+                  CREATE TABLE Ticket(
+                     ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                     RAFFLEID INTEGER,
+                     CUSTOMERNAME VARCHAR(255),
+                     FOREIGN KEY(RAFFLEID) REFERENCES Raffle(ID)
+                  );
+              """
+            
+             createTableWithQuery(creatTicketsTableQuery, tableName: "Ticket")
+         }
+    
+    let creatTicketsTableQuery = """
+        CREATE TABLE Ticket(
+           ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+           RAFFLEID INTEGER,
+           CUSTOMERNAME VARCHAR(255),
+           FOREIGN KEY(RAFFLEID) REFERENCES Raffle(ID)
+        );
+    """
+    
+
     func insert(raffle:Raffle)
     {
      let insertStatementQuery =
-        "INSERT INTO Raffle (Name, Price, Description) VALUES (?, ?, ?);"
+        "INSERT INTO Raffle (Name, Price, Description) VALUES ( ?, ?, ?);"
         
         insertWithQuery(insertStatementQuery, bindingFunction: { (insertStatement) in
         sqlite3_bind_text(insertStatement, 1, NSString(string:raffle.name).utf8String, -1, nil)
         sqlite3_bind_int(insertStatement, 2, raffle.price)
-        sqlite3_bind_text(insertStatement, 3, NSString(string:raffle.description).utf8String, -1,
-        nil)
-        })
+        sqlite3_bind_text(insertStatement, 3, NSString(string:raffle.description).utf8String, -1,nil)
+            //sqlite3_bind_int(insertStatement, 4, raffle.NumberOfTicket )
+        });
     }
+    
+   
     
     func selectAllRaffles() -> [Raffle]
     {
@@ -330,6 +366,7 @@ createTableWithQuery(creatRafflesTableQuery, tableName: "Raffle")
         name: String(cString:sqlite3_column_text(row, 1)),
         price: sqlite3_column_int(row, 2),
         description:  String(cString:sqlite3_column_text(row, 3))
+       // NumberOfTicket:sqlite3_column_int(row, 4)
         )
 
         //add it to the result array
@@ -349,6 +386,7 @@ createTableWithQuery(creatRafflesTableQuery, tableName: "Raffle")
         name: String(cString:sqlite3_column_text(row, 1)),
         price:  sqlite3_column_int(row, 2),
         description:  String(cString:sqlite3_column_text(row, 3))
+       // NumberOfTicket: sqlite3_column_int(row, 4)
         )
         },bindingFunction: { (selectStatement) in
             sqlite3_bind_int(selectStatement, 1, id)
@@ -357,12 +395,56 @@ createTableWithQuery(creatRafflesTableQuery, tableName: "Raffle")
         return result
     }
 
+   
+       
+    func insertTicket(ticket:Ticket) {
+        
+       let insertStatementQuery =
+       "INSERT INTO Ticket (ID, CUSTOMERNAME) VALUES (?,?);"
+       
+           insertWithQuery(insertStatementQuery, bindingFunction: { (insertStatement) in
+               sqlite3_bind_int(insertStatement, 1,ticket.ID)
+               sqlite3_bind_text(insertStatement, 2, NSString(string:ticket.Customer_name).utf8String, -1, nil)
+           });
+       }
+   
+    func selectAllTicket() -> [Ticket]
+    {
+        var result = [Ticket]()
+        let selectStatementQuery = "SELECT id,ID, CUSTOMERNAME FROM Ticket"
+        
+        selectWithQuery(selectStatementQuery, eachRow: { (row) in
+        //create a ticket object from each result
+        let ticket = Ticket(
+        Id: sqlite3_column_int(row, 0),
+        ID: sqlite3_column_int(row, 1),
+        Customer_name:  String(cString:sqlite3_column_text(row, 2))
+        )
+
+        //add it to the result array
+        result += [ticket]
+        })
+        return result
+
+    }
+    
+    func selectTicketBy(id:Int32) -> Ticket?{
+        var result : Ticket?
+        let selectStatementQuery = "SELECT id,Ticket_Number, CUSTOMERNAME FROM Ticket where Id = ?"
+        selectWithQuery(selectStatementQuery, eachRow: { (row) in
+        //create a raffle object from each result
+        result = Ticket(
+        Id: sqlite3_column_int(row, 0),
+        ID: sqlite3_column_int(row, 1),
+        Customer_name:  String(cString:sqlite3_column_text(row, 2))
+        )
+        },bindingFunction: { (selectStatement) in
+            sqlite3_bind_int(selectStatement, 1, id)
+        })
+        
+        return result
+    }
     
     
-    
-    
-    
-    
-    
-    
+
 }
