@@ -17,7 +17,9 @@ class RaffleUITableViewController: UITableViewController {
          super.viewDidLoad()
          let database : SQLiteDatabase = SQLiteDatabase(databaseName: "MyDatabase")
         database.insert(raffle:Raffle(name:"RaffleA", price:23, description:"noteA"))
-    database.insert(raffle:Raffle(name:"RaffleB", price:19, description:"NoteB"))
+        database.insert(raffle:Raffle(name:"RaffleB", price:19, description:"NoteB"))
+        database.insertTicket(ticket:Ticket(raffleID: 1, customerName:"Adams Smitch"))
+        database.insertTicket(ticket:Ticket(raffleID: 2, customerName:"tony Smitch"))
         raffles = database.selectAllRaffles()
     }
 
@@ -41,6 +43,7 @@ class RaffleUITableViewController: UITableViewController {
         {
              raffleCell.nameLable.text = raffle.name
              raffleCell.priceLable.text = String(raffle.price)
+          //   rafffleCell.numberofticketLabel.text = String(raffle.NumberOfTicket)
         }
         
         return cell
@@ -52,6 +55,9 @@ class RaffleUITableViewController: UITableViewController {
     {
         super.prepare(for: segue, sender: sender)
         if segue.identifier == "ShowRaffleDetailSegue"
+            
+            //"Showdetailsegue"
+            //"ShowRaffleDetailSegue"
     {
     guard let detailViewController = segue.destination as? RaffleDetailViewController else
     {
@@ -68,26 +74,26 @@ class RaffleUITableViewController: UITableViewController {
             detailViewController.raffle = selectedRaffle
         }
     }
-    
-    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let itemTemMove = raffles[sourceIndexPath.item]
-        raffles.remove(at: sourceIndexPath.item)
-        raffles.insert(itemTemMove, at: destinationIndexPath.item)
-    }
-    
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if (editingStyle == .delete){
-            raffles.remove(at: indexPath.item)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
+    //reorder the list only, not the database
+        override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+            let itemTemMove = raffles[sourceIndexPath.item]
+            raffles.remove(at: sourceIndexPath.item)
+            raffles.insert(itemTemMove, at: destinationIndexPath.item)
         }
-    }
-    
-//    edit mode
-    @IBAction func editAction(_ sender: UIBarButtonItem) {
-        self.tableView.isEditing = !self.tableView.isEditing
-        sender.title = (self.tableView.isEditing) ? "Done": "Edit"
-     }
-    
+     //delete the raffle from array and database
+        override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+            if (editingStyle == .delete){
+                raffles.remove(at: indexPath.item)
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+        }
+        
+    //    edit mode button checking  switching text when it being click
+        @IBAction func editAction(_ sender: UIBarButtonItem) {
+            self.tableView.isEditing = !self.tableView.isEditing
+            sender.title = (self.tableView.isEditing) ? "Done": "Edit"
+         }
+
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

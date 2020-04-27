@@ -14,6 +14,11 @@ class RaffleDetailViewController: UIViewController {
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var priceLable: UILabel!
     @IBOutlet var descriptionLable: UILabel!
+    @IBOutlet var raffleId: UILabel!
+    
+    var raffleID: Int32!
+    
+
     
     override func viewDidLoad()
     {
@@ -23,8 +28,19 @@ class RaffleDetailViewController: UIViewController {
             nameLabel.text = displayRaffle.name
             priceLable.text = String(displayRaffle.price)
             descriptionLable.text = displayRaffle.description
+            raffleID = displayRaffle.ID
+         
     } }
-    
+  
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
+
+        if segue.identifier == "ticketUITableView"
+        {
+            let nextScreen = segue.destination as! TicketUITableViewController
+            nextScreen.raffleIdFromPreviousView = raffleID
+        }
+
+    }
 
     /*
     // MARK: - Navigation

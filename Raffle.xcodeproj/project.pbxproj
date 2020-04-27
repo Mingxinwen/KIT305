@@ -7,12 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F328323244744A90070ED6A /* Ticket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F328322244744A90070ED6A /* Ticket.swift */; };
+		1FD3D436244C78BE00C455DD /* TicketUITableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3D435244C78BE00C455DD /* TicketUITableViewController.swift */; };
+		1FD3D43E244D8E9400C455DD /* TicketDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3D43D244D8E9400C455DD /* TicketDetailViewController.swift */; };
+		1FD3D440244D96AD00C455DD /* TicketUITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3D43F244D96AD00C455DD /* TicketUITableViewCell.swift */; };
 		3312DCC824440CD900274BCB /* SQLiteDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3312DCC724440CD900274BCB /* SQLiteDatabase.swift */; };
 		3312DCCA24440D3500274BCB /* Raffle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3312DCC924440D3500274BCB /* Raffle.swift */; };
 		33B233C12445B29100F9FCB9 /* RaffleDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B233C02445B29100F9FCB9 /* RaffleDetailViewController.swift */; };
 		33B541DB2445597D00D747DD /* RaffleUITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B541DA2445597D00D747DD /* RaffleUITableViewCell.swift */; };
 		33B541DD24455CA100D747DD /* RaffleUITableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B541DC24455CA100D747DD /* RaffleUITableViewController.swift */; };
-		33DE68FD2446A599007B7DDA /* Ticket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DE68FC2446A599007B7DDA /* Ticket.swift */; };
 		33E0031F24440277002954BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E0031E24440277002954BE /* AppDelegate.swift */; };
 		33E0032124440277002954BE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E0032024440277002954BE /* SceneDelegate.swift */; };
 		33E0032324440277002954BE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E0032224440277002954BE /* ViewController.swift */; };
@@ -23,12 +26,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1F328322244744A90070ED6A /* Ticket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ticket.swift; sourceTree = "<group>"; };
+		1FD3D435244C78BE00C455DD /* TicketUITableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketUITableViewController.swift; sourceTree = "<group>"; };
+		1FD3D43D244D8E9400C455DD /* TicketDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketDetailViewController.swift; sourceTree = "<group>"; };
+		1FD3D43F244D96AD00C455DD /* TicketUITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketUITableViewCell.swift; sourceTree = "<group>"; };
 		3312DCC724440CD900274BCB /* SQLiteDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLiteDatabase.swift; sourceTree = "<group>"; };
 		3312DCC924440D3500274BCB /* Raffle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Raffle.swift; sourceTree = "<group>"; };
 		33B233C02445B29100F9FCB9 /* RaffleDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaffleDetailViewController.swift; sourceTree = "<group>"; };
 		33B541DA2445597D00D747DD /* RaffleUITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaffleUITableViewCell.swift; sourceTree = "<group>"; };
 		33B541DC24455CA100D747DD /* RaffleUITableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaffleUITableViewController.swift; sourceTree = "<group>"; };
-		33DE68FC2446A599007B7DDA /* Ticket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ticket.swift; sourceTree = "<group>"; };
 		33E0031B24440277002954BE /* Raffle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Raffle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33E0031E24440277002954BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		33E0032024440277002954BE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -87,8 +93,8 @@
 		33E00332244402CC002954BE /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				33DE68FC2446A599007B7DDA /* Ticket.swift */,
 				3312DCC924440D3500274BCB /* Raffle.swift */,
+				1F328322244744A90070ED6A /* Ticket.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -105,8 +111,11 @@
 		33E003342444032C002954BE /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				1FD3D43D244D8E9400C455DD /* TicketDetailViewController.swift */,
 				33B541DC24455CA100D747DD /* RaffleUITableViewController.swift */,
+				1FD3D435244C78BE00C455DD /* TicketUITableViewController.swift */,
 				33B541DA2445597D00D747DD /* RaffleUITableViewCell.swift */,
+				1FD3D43F244D96AD00C455DD /* TicketUITableViewCell.swift */,
 				33E0032224440277002954BE /* ViewController.swift */,
 			);
 			path = Controller;
@@ -184,14 +193,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FD3D436244C78BE00C455DD /* TicketUITableViewController.swift in Sources */,
 				33E0032324440277002954BE /* ViewController.swift in Sources */,
 				33E0031F24440277002954BE /* AppDelegate.swift in Sources */,
 				33B233C12445B29100F9FCB9 /* RaffleDetailViewController.swift in Sources */,
 				33B541DD24455CA100D747DD /* RaffleUITableViewController.swift in Sources */,
+				1F328323244744A90070ED6A /* Ticket.swift in Sources */,
 				3312DCC824440CD900274BCB /* SQLiteDatabase.swift in Sources */,
+				1FD3D440244D96AD00C455DD /* TicketUITableViewCell.swift in Sources */,
 				33B541DB2445597D00D747DD /* RaffleUITableViewCell.swift in Sources */,
 				33E0032124440277002954BE /* SceneDelegate.swift in Sources */,
-				33DE68FD2446A599007B7DDA /* Ticket.swift in Sources */,
+				1FD3D43E244D8E9400C455DD /* TicketDetailViewController.swift in Sources */,
 				3312DCCA24440D3500274BCB /* Raffle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
