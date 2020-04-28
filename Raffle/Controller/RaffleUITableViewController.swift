@@ -12,6 +12,13 @@ class RaffleUITableViewController: UITableViewController {
     
     var raffles = [Raffle]()
 
+    @IBOutlet var searchBar: UISearchBar!
+    
+    
+    var searchRaffle = [Raffle]()
+    var searching = false
+    
+    
     override func viewDidLoad()
     {
          super.viewDidLoad()
@@ -31,19 +38,32 @@ class RaffleUITableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return raffles.count
+        // add condition searching
+        if searching{
+            return searchRaffle.count
+        } else {
+            return raffles.count
+        }
+       // return raffles.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
     let cell = tableView.dequeueReusableCell(withIdentifier: "RaffleUITableViewCell", for: indexPath)
-    
-        let raffle = raffles[indexPath.row]
+        
+    // add seaching condition to search raffles
+        var currentRaffle = raffles[indexPath.row]
+        if searching {
+            currentRaffle = searchRaffle[indexPath.row]
+        } else{
+            currentRaffle = raffles[indexPath.row]
+        }
+        
+        //let raffle = raffles[indexPath.row]
         if let raffleCell = cell as? RaffleUITableViewCell
         {
-             raffleCell.nameLable.text = raffle.name
-             raffleCell.priceLable.text = String(raffle.price)
-          //   rafffleCell.numberofticketLabel.text = String(raffle.NumberOfTicket)
+             raffleCell.nameLable.text = currentRaffle.name
+             raffleCell.priceLable.text = String(currentRaffle.price)
         }
         
         return cell
@@ -93,6 +113,7 @@ class RaffleUITableViewController: UITableViewController {
             self.tableView.isEditing = !self.tableView.isEditing
             sender.title = (self.tableView.isEditing) ? "Done": "Edit"
          }
+    
 
     /*
     // Override to support conditional editing of the table view.
@@ -140,3 +161,20 @@ class RaffleUITableViewController: UITableViewController {
     */
 
 }
+
+extension RaffleUITableViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText : String) {
+        searchRaffle = raffles.filter({(Raffless: Raffle) -> Bool in Raffless.name.lowercased().contains(searchText.lowercased())})
+        searching = true
+        tableView.reloadData()
+    }
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searching = false
+        searchBar.text = ""
+        tableView.reloadData()
+    }
+    }
+    
+    
+
+   
