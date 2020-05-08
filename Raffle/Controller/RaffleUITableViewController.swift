@@ -11,10 +11,7 @@ import UIKit
 class RaffleUITableViewController: UITableViewController {
     
     var raffles = [Raffle]()
-
     @IBOutlet var searchBar: UISearchBar!
-    
-    
     var searchRaffle = [Raffle]()
     var searching = false
     
@@ -23,10 +20,10 @@ class RaffleUITableViewController: UITableViewController {
     {
          super.viewDidLoad()
          let database : SQLiteDatabase = SQLiteDatabase(databaseName: "MyDatabase")
-        database.insert(raffle:Raffle(name:"RaffleA", price:23, description:"noteA"))
-        database.insert(raffle:Raffle(name:"RaffleB", price:19, description:"NoteB"))
-        database.insertTicket(ticket:Ticket(raffleID: 1, customerName:"Adams Smitch"))
-        database.insertTicket(ticket:Ticket(raffleID: 2, customerName:"tony Smitch"))
+//        database.insert(raffle:Raffle(name:"RaffleA", price:23, description:"noteA", prize:500, ticketNumber:100))
+//        database.insert(raffle:Raffle(name:"RaffleB", price:19, description:"NoteB", prize:600, ticketNumber:200))
+//        database.insertTicket(ticket:Ticket(raffleID: 1, customerName:"Adams Smitch"))
+//        database.insertTicket(ticket:Ticket(raffleID: 2, customerName:"tony Smitch"))
         raffles = database.selectAllRaffles()
     }
 

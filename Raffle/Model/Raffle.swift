@@ -13,7 +13,11 @@ public struct Raffle
 var ID:Int32 = -1
 var name:String
 var price:Int32
-var description:String
+    var description:String
+    var prize:Int32
+    var ticketNumber:Int32
+
+    
 //var NumberOfTicket:Int32?
 //var NumberOfTicket = [Int]()
     
