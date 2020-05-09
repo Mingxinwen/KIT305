@@ -43,13 +43,11 @@ class CreateRaffleViewController: UIViewController {
         }
         
         let database : SQLiteDatabase = SQLiteDatabase(databaseName: "MyDatabase")
-        database.insert(raffle:Raffle(name:raffleName, price:ticketPrice, description:raffleDescription, prize:rafflePrize, ticketNumber:totalTicketNumber))
+        database.insert(raffle:Raffle(name:raffleName, price:ticketPrice, description:raffleDescription, prize:rafflePrize, ticketNumber:totalTicketNumber, currentTicketNumber:0))
         
     }
     
-    @IBAction func cancleBtn(_ sender: UIBarButtonItem) {
-        presentingViewController?.dismiss(animated: true)
-    }
+    
     
     
 

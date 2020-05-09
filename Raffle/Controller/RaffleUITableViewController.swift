@@ -22,7 +22,8 @@ class RaffleUITableViewController: UITableViewController {
          let database : SQLiteDatabase = SQLiteDatabase(databaseName: "MyDatabase")
 //        database.insert(raffle:Raffle(name:"RaffleA", price:23, description:"noteA", prize:500, ticketNumber:100))
 //        database.insert(raffle:Raffle(name:"RaffleB", price:19, description:"NoteB", prize:600, ticketNumber:200))
-//        database.insertTicket(ticket:Ticket(raffleID: 1, customerName:"Adams Smitch"))
+//          database.insertTicket(ticket:Ticket(ticketNumber:123, raffleID: 1, customerName:"Adams Smitch", customerPhone:0420782458, customerEmail:"emailaddress"))
+
 //        database.insertTicket(ticket:Ticket(raffleID: 2, customerName:"tony Smitch"))
         raffles = database.selectAllRaffles()
     }
@@ -84,6 +85,7 @@ class RaffleUITableViewController: UITableViewController {
     {
                 fatalError("Unexpected sender: \( String(describing: sender))")
             }
+        
     guard let indexPath = tableView.indexPath(for: selectedRaffleCell) else
     {
     fatalError("The selected cell is not being displayed by the table") }
@@ -91,6 +93,7 @@ class RaffleUITableViewController: UITableViewController {
             detailViewController.raffle = selectedRaffle
         }
     }
+    
     //reorder the list only, not the database
         override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
             let itemTemMove = raffles[sourceIndexPath.item]

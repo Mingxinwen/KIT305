@@ -19,8 +19,8 @@ class ViewController: UIViewController {
     //        print(database.selectAllMovies())
             print(database.selectRafflesBy(id:1) ?? "Raffle not found")
 
-        database.insertTicket(ticket:Ticket(raffleID: 1, customerName:"Adams Smitch"))
-        database.insertTicket(ticket:Ticket(raffleID: 2, customerName:"Andy"))
+//        database.insertTicket(ticket:Ticket(ticketNumber:123, raffleID: 1, customerName:"Adams Smitch", customerPhone:0420782458, customerEmail:"123test@gmail.com"))
+
         
          // print(database.selectTicketsBy(id:1) ?? "Raffle not found")
         }
