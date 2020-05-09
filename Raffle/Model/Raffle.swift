@@ -13,15 +13,8 @@ public struct Raffle
 var ID:Int32 = -1
 var name:String
 var price:Int32
-var description:String
-//var NumberOfTicket:Int32?
-//var NumberOfTicket = [Int]()
-    
-//    init(ID: Int, name: String, price: String,description:String, NumberOfTicket: Int32){
-//        self.ID = Int32(ID)
-//           self.name = name
-//           self.description = description
-//        self.NumberOfTicket = NumberOfTicket
-//
-//       }
+    var description:String
+    var prize:Int32
+    var ticketNumber:Int32
+    var currentTicketNumber:Int32
 }
