@@ -10,7 +10,10 @@ import Foundation
 
 public struct Ticket
 {
-    var ID:Int32 = -1
+    var ticketID:Int32 = -1
+    var ticketNumber: Int32
     var raffleID:Int32
     var customerName:String
+    var customerPhone:Int32
+    var customerEmail:String
 }

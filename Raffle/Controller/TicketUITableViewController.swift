@@ -18,6 +18,7 @@ class TicketUITableViewController: UITableViewController {
         super.viewDidLoad()
         let database : SQLiteDatabase = SQLiteDatabase(databaseName: "MyDatabase")
         tickets = database.selectAllTicket(raffleID: raffleIdFromPreviousView!)
+        print(tickets.count)
 //        tickets = database.selectAllTicket(raffleID: 1)
     }
 
@@ -43,7 +44,7 @@ class TicketUITableViewController: UITableViewController {
         if let ticketleCell = cell as? TicketUITableViewCell
         {
              ticketleCell.CustomerNameLabel.text = ticket.customerName
-             ticketleCell.TicketNumberLabel.text = String(ticket.ID)
+            ticketleCell.TicketNumberLabel.text = String(ticket.ticketNumber)
 
         }
         
