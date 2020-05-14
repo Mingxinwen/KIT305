@@ -8,27 +8,36 @@
 
 import UIKit
 
-class SellTicketUIViewController: UIViewController {
+class SellTicketUIViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
     @IBOutlet var customerName: UITextField!
     @IBOutlet var customerPhone: UITextField!
     @IBOutlet var customerEmail: UITextField!
     @IBOutlet var numberOfTicket: UILabel!
+    @IBOutlet var totalCostTextField: UITextField!
+    @IBOutlet var totalCostLabel: UILabel!
+    
+    @IBOutlet var ticketNumberLabel: UILabel!
+    
+    var nameOfcustomer: String?=nil
     var raffleIdFromTicketView: Int32?
     //total ticket numbere allow to sell for this raffle
-    var ticketNumberFromPreviousView: Int32?
+    var ticketNumberFromPreviousView: Int32!
     //ticket price from the raffle information page
-    var ticketPriceFromPreviousView:Int32?
-    //current ticket number in the ticket array, how many tickets for this raffle so far
+    var ticketPriceFromPreviousView:Int32?    //current ticket number in the ticket array, how many tickets for this raffle so far
     var currentTicketNumber: Int32 = 0
     //new total ticket number after selling
     var newTicketNumber:Int32 = 0
     //the stepper number of how many ticket you want to sell
     var ticketNumberFromStepper:Int32 = 1
+    var arrayTicketNumber: [Int] = []
     //tickets array for checking how many ticket currently
+    var ticketPerCustomerPrevious:Int32!
+    var arrayToString:String?
     var tickets = [Ticket]()
+    var ticket: Ticket?
     
+    @IBOutlet var SellButton: UIButton!
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         let database : SQLiteDatabase = SQLiteDatabase(databaseName: "MyDatabase")
@@ -36,43 +45,106 @@ class SellTicketUIViewController: UIViewController {
         print(tickets.count)
         currentTicketNumber = Int32(tickets.count)
         // Do any additional setup after loading the view.
+        self.SellButton.isHidden = false
+        self.customerName.text = nameOfcustomer;
     }
+    
+    @IBAction func shareButtonTapped(_ sender: Any) {
+       
+        let combined = "\(String(describing: nameOfcustomer))\n Ticket Number:\n \(numberOfTicket!)"
+        let shareviewController = UIActivityViewController(activityItems: [combined], applicationActivities: nil)
+        shareviewController.excludedActivityTypes = [UIActivity.ActivityType.postToFacebook]
+        shareviewController.popoverPresentationController?.sourceView = self.view
+        present(shareviewController,animated: true, completion: nil)
+        
+    }
+    
     @IBAction func ticketStepper(_ sender: UIStepper) {
         ticketNumberFromStepper = Int32(sender.value + 1)
-        numberOfTicket.text = String(ticketNumberFromStepper)
-        //check total ticket number here
+        
+        if( 6 > ticketNumberFromStepper) {
+            numberOfTicket.text = String(ticketNumberFromStepper)
+                   //check total ticket number here
+            totalCostLabel.text = String(ticketNumberFromStepper*ticketPriceFromPreviousView!)
+            
+        }else{
+            let combined = " You only by\(5) Tickets"
+            let alert = UIAlertController(
+                        title: "Warring!",
+                        message: combined,
+                        preferredStyle: UIAlertController.Style.alert)
+            // add an action (button)
+            alert.addAction(UIAlertAction(
+                            title: "Try again!",
+                            style: UIAlertAction.Style.cancel,
+                            handler: nil ))
+            // show the alertself.
+            present(alert, animated: true, completion: nil)
+             //dismiss(animated: true, completion: nil)
+        }
+       
     }
     
     @IBAction func sellTicket(_ sender: UIButton) {
-        guard let customerName = customerName.text, !customerName.isEmpty else{
-            return
-        }
-        guard let customerPhone = Int32(customerPhone.text!) else{
-            return
-        }
-        guard let customerEmail = customerEmail.text, !customerEmail.isEmpty else{
-            return
-        }
         
         newTicketNumber = currentTicketNumber + ticketNumberFromStepper
         if (newTicketNumber <= ticketNumberFromPreviousView!){
-            let database : SQLiteDatabase = SQLiteDatabase(databaseName: "MyDatabase")
-            database.insertTicket(ticket:Ticket(ticketNumber:123, raffleID: raffleIdFromTicketView!, customerName:customerName, customerPhone:customerPhone, customerEmail:customerEmail))
+            
+            let myInt1 = (numberOfTicket.text! as NSString).integerValue
+
+            for u in 1...(myInt1)  {
+                let number = currentTicketNumber + Int32(u)
+                arrayTicketNumber.append(Int(number))
+                   }
+            
+            arrayToString = (arrayTicketNumber.map{String($0)}).joined(separator: ",")
+               ticketNumberLabel.text = arrayToString
+            
+            guard let customerName = customerName.text, !customerName.isEmpty else{
+                       return
+                   }
+            guard let customerPhone = Int32(customerPhone.text!) else{
+                       return
+                   }
+            guard let customerEmail = customerEmail.text, !customerEmail.isEmpty else{
+                       return
+                   }
+            let database : SQLiteDatabase = SQLiteDatabase(databaseName: "MyDatabase");
+            
+            for i in arrayTicketNumber {
+                database.insertTicket(ticket:Ticket(ticketNumber:Int32(i), raffleID: raffleIdFromTicketView!, customerName:customerName, customerPhone:customerPhone, customerEmail:customerEmail))
+            }
+            
+            let combined = "Ticket Number:\n \(arrayToString!)"
+                   
+                   let alert = UIAlertController(
+                               title: "Ticket Sold!",
+                               message: combined,
+                               preferredStyle: UIAlertController.Style.alert)
+                   // add an action (button)
+                   alert.addAction(UIAlertAction(
+                                   title: "Good Luck!",
+                                   style: UIAlertAction.Style.cancel,
+                                   handler: nil ))
+                   // show the alertself.
+                   present(alert, animated: true, completion: nil)
+                   SellButton.isHidden = true
+        }else{
+        let combined = " Only \(ticketNumberFromPreviousView - currentTicketNumber)Ticket left"
+        let alert = UIAlertController(
+                        title: "Warring!",
+                        message: combined,
+                        preferredStyle: UIAlertController.Style.alert)
+            // add an action (button)
+            alert.addAction(UIAlertAction(
+                            title: "Try again!",
+                            style: UIAlertAction.Style.cancel,
+                            handler: nil ))
+            // show the alertself.
+            present(alert, animated: true, completion: nil)
+             //dismiss(animated: true, completion: nil)
         }
         //do something if over sell
-        dismiss(animated: true, completion: nil)
+       
     }
-    
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

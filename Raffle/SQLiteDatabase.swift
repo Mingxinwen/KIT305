@@ -26,7 +26,7 @@ class SQLiteDatabase
      
         WARNING: DOING THIS WILL WIPE YOUR DATA, unless you modify how updateDatabase() works.
      */
-    private let DATABASE_VERSION = 31
+    private let DATABASE_VERSION = 33
     
     
     
@@ -409,6 +409,19 @@ createTableWithQuery(creatRafflesTableQuery, tableName: "Raffle")
         })
         
         return result
+    }
+    
+    func updateRaffle(raffle: Raffle){
+        let updateStatementQuery = "UPDATE Raffle SET 'Name'=?, 'Price'= ?, 'Description'=?, 'Prize'=?, 'TicketNumber'=?, 'CurrentTicketNumber=?' WHERE 'id'=?) VALUES"
+        updateWithQuery(updateStatementQuery, bindingFunction: { (updateStatementQuery) in
+            sqlite3_bind_text(updateStatementQuery, 1, NSString(string:raffle.name).utf8String, -1, nil)
+            sqlite3_bind_int(updateStatementQuery, 2, raffle.price)
+            sqlite3_bind_text(updateStatementQuery, 3, NSString(string:raffle.description).utf8String, -1,nil)
+            sqlite3_bind_int(updateStatementQuery, 4, raffle.prize)
+            sqlite3_bind_int(updateStatementQuery, 5, raffle.ticketNumber)
+            sqlite3_bind_int(updateStatementQuery, 6, raffle.currentTicketNumber)
+        });
+        
     }
     
     func selectAllTicket(raffleID:Int32) -> [Ticket]
