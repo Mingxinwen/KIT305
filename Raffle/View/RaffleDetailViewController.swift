@@ -17,6 +17,8 @@ class RaffleDetailViewController: UIViewController {
     @IBOutlet var raffleId: UILabel!
     @IBOutlet var rafflePrize: UILabel!
     @IBOutlet var totalNumberOfTicket: UILabel!
+  
+    
     
     var raffleID: Int32!
     var ticketNumber: Int32!
@@ -24,7 +26,6 @@ class RaffleDetailViewController: UIViewController {
     var ticketPrice: Int32!
     
 
-    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -49,6 +50,7 @@ class RaffleDetailViewController: UIViewController {
         {
             let nextScreen = segue.destination as! TicketUITableViewController
             nextScreen.raffleIdFromPreviousView = raffleID
+            print(4444)
         }
         if segue.identifier == "ticketSellView"
         {
@@ -69,5 +71,4 @@ class RaffleDetailViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
 }

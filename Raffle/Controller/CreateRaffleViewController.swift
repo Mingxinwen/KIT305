@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreateRaffleViewController: UIViewController {
+class CreateRaffleViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet var raffleName: UITextField!
     @IBOutlet var raffleDescription: UITextField!
@@ -17,8 +17,11 @@ class CreateRaffleViewController: UIViewController {
     @IBOutlet var totalTicketNumber: UITextField!
     @IBOutlet var raffleType: UISwitch!
     @IBOutlet var createRaffleBtn: UIButton!
+    @IBOutlet weak var imageView: UIImageView!
     
-    
+    @IBOutlet var ticketPerCustomer: UITextField!
+    var customerby: Int32? = nil
+   
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -42,23 +45,47 @@ class CreateRaffleViewController: UIViewController {
             return
         }
         
+        _ = Int32(ticketPerCustomer.text!)
+        
         let database : SQLiteDatabase = SQLiteDatabase(databaseName: "MyDatabase")
-        database.insert(raffle:Raffle(name:raffleName, price:ticketPrice, description:raffleDescription, prize:rafflePrize, ticketNumber:totalTicketNumber, currentTicketNumber:0))
+        database.insert(raffle:Raffle(name:raffleName, price:ticketPrice, description:raffleDescription, prize:rafflePrize, ticketNumber:totalTicketNumber, currentTicketNumber:0, winnerOfRaffle: nil))
         
     }
     
-    
-    
-    
+   override func prepare(for segue: UIStoryboardSegue, sender: Any?){
 
-    /*
-    // MARK: - Navigation
+                  if segue.identifier == "GetTicketPerCustomerSegue"
+                  {
+                      let nextScreen = segue.destination as! SellTicketUIViewController
+                   nextScreen.ticketPerCustomerPrevious = customerby
+                  }
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+              }
+    
+    @IBAction func galleryButtonTapped(_ sender: UIButton) {
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
+                   print("Gallery availble")
+                   let imagePicker:UIImagePickerController = UIImagePickerController()
+                              imagePicker.delegate = self
+                              imagePicker.sourceType = .photoLibrary;
+                              imagePicker.allowsEditing = false
+                              
+                              self.present(imagePicker, animated: true, completion: nil)
+               }
     }
-    */
-
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+        {
+            imageView.image = image
+            dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+                     dismiss(animated: true, completion: nil)
+                 }
+   
 }
+
+

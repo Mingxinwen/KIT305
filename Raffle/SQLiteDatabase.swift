@@ -21,12 +21,12 @@ class SQLiteDatabase
     private var db: OpaquePointer?
     
     /* Change this value whenever you make a change to table structure.
-        When a version change is detected, the updateDatabase() function is called,
-        which in turn calls the createTables() function.
+     When a version change is detected, the updateDatabase() function is called,
+     which in turn calls the createTables() function.
      
-        WARNING: DOING THIS WILL WIPE YOUR DATA, unless you modify how updateDatabase() works.
+     WARNING: DOING THIS WILL WIPE YOUR DATA, unless you modify how updateDatabase() works.
      */
-    private let DATABASE_VERSION = 31
+    private let DATABASE_VERSION = 42
     
     
     
@@ -72,7 +72,7 @@ class SQLiteDatabase
         //e.g. createRaffleTable()
         createRaffleTable()
         createTicketTable()
-
+        
     }
     private func dropTables()
     {
@@ -118,7 +118,7 @@ class SQLiteDatabase
     /* --------------------------------*/
     
     /* Pass this function a CREATE sql string, and a table name, and it will create a table
-        You should call this function from createTables()
+     You should call this function from createTables()
      */
     private func createTableWithQuery(_ createTableQuery:String, tableName:String)
     {
@@ -153,7 +153,7 @@ class SQLiteDatabase
         
     }
     /* Pass this function a table name.
-        You should call this function from dropTables()
+     You should call this function from dropTables()
      */
     private func dropTable(tableName:String)
     {
@@ -166,7 +166,7 @@ class SQLiteDatabase
         //prepare the statement
         let query = "DROP TABLE IF EXISTS \(tableName)"
         var statement: OpaquePointer? = nil
-
+        
         if sqlite3_prepare_v2(db, query, -1, &statement, nil)     == SQLITE_OK
         {
             //run the query
@@ -221,7 +221,7 @@ class SQLiteDatabase
             print("INSERT statement could not be prepared.")
             printCurrentSQLErrorMessage(db)
         }
-    
+        
         //clean up
         sqlite3_finalize(insertStatement)
     }
@@ -296,7 +296,7 @@ class SQLiteDatabase
     /* --------------------------------*/
     func createRaffleTable()
     {
-              let creatRafflesTableQuery = """
+        let creatRafflesTableQuery = """
               CREATE TABLE Raffle (
                  ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
                  NAME CHAR(255),
@@ -304,15 +304,16 @@ class SQLiteDatabase
                  DESCRIPTION CHAR(255),
                  PRIZE INTEGER,
                  TICKETNUMBER INTEGER,
-                 CURRENTTICKETNUMBER INTEGER
+                 CURRENTTICKETNUMBER INTEGER,
+                 WINNEROFRAFFLE CHAR(255)
         );
  """
-createTableWithQuery(creatRafflesTableQuery, tableName: "Raffle")
+        createTableWithQuery(creatRafflesTableQuery, tableName: "Raffle")
     }
     
-   // add fuction creatTickectTable
-         func createTicketTable() {
-            let creatTicketsTableQuery = """
+    // add fuction creatTickectTable
+    func createTicketTable() {
+        let creatTicketsTableQuery = """
                   CREATE TABLE Ticket(
                      TICKETID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
                      RAFFLEID INTEGER,
@@ -323,41 +324,41 @@ createTableWithQuery(creatRafflesTableQuery, tableName: "Raffle")
                      FOREIGN KEY(RAFFLEID) REFERENCES Raffle(ID)
                   );
               """
-             createTableWithQuery(creatTicketsTableQuery, tableName: "Ticket")
-         }
+        createTableWithQuery(creatTicketsTableQuery, tableName: "Ticket")
+    }
     
     func insert(raffle:Raffle)
     {
-     let insertStatementQuery =
-        "INSERT INTO Raffle (Name, Price, Description, Prize, TicketNumber, CurrentTicketNumber) VALUES ( ?, ?, ?, ?, ?, ?);"
+        let insertStatementQuery =
+        "INSERT INTO Raffle (Name, Price, Description, Prize, TicketNumber, CurrentTicketNumber, winnerOfRaffle) VALUES ( ?, ?, ?, ?, ?, ?, ?);"
         
         insertWithQuery(insertStatementQuery, bindingFunction: { (insertStatement) in
-        sqlite3_bind_text(insertStatement, 1, NSString(string:raffle.name).utf8String, -1, nil)
-        sqlite3_bind_int(insertStatement, 2, raffle.price)
-        sqlite3_bind_text(insertStatement, 3, NSString(string:raffle.description).utf8String, -1,nil)
-        sqlite3_bind_int(insertStatement, 4, raffle.prize)
-        sqlite3_bind_int(insertStatement, 5, raffle.ticketNumber)
-        sqlite3_bind_int(insertStatement, 6, raffle.currentTicketNumber)
-
+            sqlite3_bind_text(insertStatement, 1, NSString(string:raffle.name).utf8String, -1, nil)
+            sqlite3_bind_int(insertStatement, 2, raffle.price)
+            sqlite3_bind_text(insertStatement, 3, NSString(string:raffle.description).utf8String, -1,nil)
+            sqlite3_bind_int(insertStatement, 4, raffle.prize)
+            sqlite3_bind_int(insertStatement, 5, raffle.ticketNumber)
+            sqlite3_bind_int(insertStatement, 6, raffle.currentTicketNumber)
+            sqlite3_bind_text(insertStatement, 7, NSString(string:raffle.winnerOfRaffle ?? "").utf8String, -1, nil)
             //sqlite3_bind_int(insertStatement, 4, raffle.NumberOfTicket )
         });
     }
     
-//    func updateaRaffle(current:Int32, id:Int32){
-//        let updateStatementQuery =
-//        "UPDATE Raffle SET Name = 'mingxo', CurrentTicketNumber = ? WHERE ID = 1"
-//        updateWithQuery(updateStatementQuery, bindingFunction: {(updateStatement) in
-//            sqlite3_bind_int(updateStatement, 1, current)
-//            sqlite3_bind_int(updateStatement, 2, id)
-//        })
-//        
-//    }
+//        func updateaRaffle(current:Int32, id:Int32){
+//            let updateStatementQuery =
+//            "UPDATE Raffle SET Name = 'mingxo', CurrentTicketNumber = ? WHERE ID = 1"
+//            updateWithQuery(updateStatementQuery, bindingFunction: {(updateStatement) in
+//                sqlite3_bind_int(updateStatement, 1, current)
+//                sqlite3_bind_int(updateStatement, 2, id)
+//            })
+//
+//        }
     
     func insertTicket(ticket:Ticket) {
-
-    let insertStatementQuery =
-    "INSERT INTO Ticket (RaffleId, Ticketnumber, Customername, Customerphone, Customeremail) VALUES (?,?,?,?,?);"
-    
+        
+        let insertStatementQuery =
+        "INSERT INTO Ticket (RaffleId, Ticketnumber, Customername, Customerphone, Customeremail) VALUES (?,?,?,?,?);"
+        
         insertWithQuery(insertStatementQuery, bindingFunction: { (insertStatement) in
             sqlite3_bind_int(insertStatement, 1,ticket.raffleID)
             sqlite3_bind_int(insertStatement, 2,ticket.ticketNumber)
@@ -367,43 +368,60 @@ createTableWithQuery(creatRafflesTableQuery, tableName: "Raffle")
         });
     }
     
-
+    
     func selectAllRaffles() -> [Raffle]
     {
         var result = [Raffle]()
-        let selectStatementQuery = "SELECT id,name,price,description,prize,ticketNumber FROM Raffle"
+        let selectStatementQuery = "SELECT id,name,price,description,prize,ticketNumber,CurrentTicketNumber,winnerOfRaffle FROM Raffle"
         
         selectWithQuery(selectStatementQuery, eachRow: { (row) in
-        //create a raffle object from each result
-        let raffle = Raffle(
-        ID: sqlite3_column_int(row, 0),
-        name: String(cString:sqlite3_column_text(row, 1)),
-        price: sqlite3_column_int(row, 2),
-        description:  String(cString:sqlite3_column_text(row, 3)),
-        prize:sqlite3_column_int(row, 4),
-        ticketNumber: sqlite3_column_int(row, 5),
-        currentTicketNumber: sqlite3_column_int(row, 6)
-        )
-        //add it to the result array
-        result += [raffle]
+            //create a raffle object from each result
+            let raffle = Raffle(
+                ID: sqlite3_column_int(row, 0),
+                name: String(cString:sqlite3_column_text(row, 1)),
+                price: sqlite3_column_int(row, 2),
+                description:  String(cString:sqlite3_column_text(row, 3)),
+                prize:sqlite3_column_int(row, 4),
+                ticketNumber: sqlite3_column_int(row, 5),
+                currentTicketNumber: sqlite3_column_int(row, 6),
+                winnerOfRaffle:String(cString:sqlite3_column_text(row, 7))
+            )
+            //add it to the result array
+            result += [raffle]
         })
         return result
     }
+    
+//    func updateRaffle(raffle: Raffle){
+//        let updateStatementQuery = "UPDATE Raffle SET 'Name'=?, 'Price'= ?, 'Description'=?, 'Prize'=?, 'TicketNumber'=?, 'CurrentTicketNumber=?' WHERE 'id'=?) VALUES"
+//        updateWithQuery(updateStatementQuery, bindingFunction: { (updateStatementQuery) in
+//            sqlite3_bind_text(updateStatementQuery, 1, NSString(string:raffle.name).utf8String, -1, nil)
+//            sqlite3_bind_int(updateStatementQuery, 2, raffle.price)
+//            sqlite3_bind_text(updateStatementQuery, 3, NSString(string:raffle.description).utf8String, -1,nil)
+//            sqlite3_bind_int(updateStatementQuery, 4, raffle.prize)
+//            sqlite3_bind_int(updateStatementQuery, 5, raffle.ticketNumber)
+//            sqlite3_bind_int(updateStatementQuery, 6, raffle.currentTicketNumber)
+//            sqlite3_bind_text(updateStatementQuery, 7, NSString(string:raffle.winnerOfRaffle!).utf8String, -1, nil)
+//        });
+//
+//    }
+    
     
     func selectRafflesBy(id:Int32) -> Raffle?{
         var result : Raffle?
         let selectStatementQuery = "SELECT id,name,price,description,prize,ticketNumber FROM Raffle where id = ?"
         selectWithQuery(selectStatementQuery, eachRow: { (row) in
-        //create a raffle object from each result
-        result = Raffle(
-        ID: sqlite3_column_int(row, 0),
-        name: String(cString:sqlite3_column_text(row, 1)),
-        price:  sqlite3_column_int(row, 2),
-        description:  String(cString:sqlite3_column_text(row, 3)),
-        prize:sqlite3_column_int(row, 4),
-        ticketNumber: sqlite3_column_int(row, 5),
-        currentTicketNumber: sqlite3_column_int(row, 6)
-        )
+            //create a raffle object from each result
+            result = Raffle(
+                ID: sqlite3_column_int(row, 0),
+                name: String(cString:sqlite3_column_text(row, 1)),
+                price:  sqlite3_column_int(row, 2),
+                description:  String(cString:sqlite3_column_text(row, 3)),
+                prize:sqlite3_column_int(row, 4),
+                ticketNumber: sqlite3_column_int(row, 5),
+                currentTicketNumber: sqlite3_column_int(row, 6),
+                winnerOfRaffle: String(cString:sqlite3_column_text(row, 7))
+            )
         },bindingFunction: { (selectStatement) in
             sqlite3_bind_int(selectStatement, 1, id)
         })
@@ -411,25 +429,36 @@ createTableWithQuery(creatRafflesTableQuery, tableName: "Raffle")
         return result
     }
     
-    func selectAllTicket(raffleID:Int32) -> [Ticket]
-       {
-           var result = [Ticket]()
-           let selectStatementQuery = "SELECT TICKETNUMBER, RAFFLEID, CUSTOMERNAME, CUSTOMERPHONE, CUSTOMEREMAIL FROM Ticket where raffleID = ?"
-           
-           selectWithQuery(selectStatementQuery, eachRow: { (row) in
-           //create a ticket object from each result
-           let ticket = Ticket(
-           ticketNumber: sqlite3_column_int(row, 0),
-           raffleID: sqlite3_column_int(row, 1),
-           customerName:  String(cString:sqlite3_column_text(row, 2)),
-           customerPhone: sqlite3_column_int(row, 3),
-           customerEmail:  String(cString:sqlite3_column_text(row, 4))
-           )
-           //add it to the result array
-           result += [ticket]
-           },bindingFunction: {(selectStatement) in sqlite3_bind_int(selectStatement, 1, raffleID)
-           })
-           return result
+    func updateRaffle(winner:String, id:Int32){
+        let updateStatementQuery = "UPDATE Raffle SET winerOfRaffle = ? WHERE raffleID = ? "
+        updateWithQuery(updateStatementQuery,bindingFunction:
+        { (updateStatement) in
+            sqlite3_bind_text(updateStatement, 1, NSString(string:winner).utf8String, -1, nil)
+            sqlite3_bind_int(updateStatement, 2, id);
+            
+        })
+    }
 
-       }
+       
+    func selectAllTicket(raffleID:Int32) -> [Ticket]
+    {
+        var result = [Ticket]()
+        let selectStatementQuery = "SELECT TICKETNUMBER, RAFFLEID, CUSTOMERNAME, CUSTOMERPHONE, CUSTOMEREMAIL FROM Ticket where raffleID = ?"
+        
+        selectWithQuery(selectStatementQuery, eachRow: { (row) in
+            //create a ticket object from each result
+            let ticket = Ticket(
+                ticketNumber: sqlite3_column_int(row, 0),
+                raffleID: sqlite3_column_int(row, 1),
+                customerName:  String(cString:sqlite3_column_text(row, 2)),
+                customerPhone: sqlite3_column_int(row, 3),
+                customerEmail:  String(cString:sqlite3_column_text(row, 4))
+            )
+            //add it to the result array
+            result += [ticket]
+        },bindingFunction: {(selectStatement) in sqlite3_bind_int(selectStatement, 1, raffleID)
+        })
+        return result
+        
+    }
 }
