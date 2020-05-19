@@ -41,6 +41,7 @@ class SellTicketUIViewController: UIViewController, UIImagePickerControllerDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         let database : SQLiteDatabase = SQLiteDatabase(databaseName: "MyDatabase")
+        
         tickets = database.selectAllTicket(raffleID: raffleIdFromTicketView!)
         print(tickets.count)
         currentTicketNumber = Int32(tickets.count)
@@ -62,13 +63,13 @@ class SellTicketUIViewController: UIViewController, UIImagePickerControllerDeleg
     @IBAction func ticketStepper(_ sender: UIStepper) {
         ticketNumberFromStepper = Int32(sender.value + 1)
         
-        if( 6 > ticketNumberFromStepper) {
+        if( 4 > ticketNumberFromStepper) {
             numberOfTicket.text = String(ticketNumberFromStepper)
                    //check total ticket number here
             totalCostLabel.text = String(ticketNumberFromStepper*ticketPriceFromPreviousView!)
             
         }else{
-            let combined = " You only by\(5) Tickets"
+            let combined = " You only by\(4) Tickets"
             let alert = UIAlertController(
                         title: "Warring!",
                         message: combined,

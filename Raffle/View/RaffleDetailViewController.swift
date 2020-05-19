@@ -50,6 +50,7 @@ class RaffleDetailViewController: UIViewController {
         {
             let nextScreen = segue.destination as! TicketUITableViewController
             nextScreen.raffleIdFromPreviousView = raffleID
+            print(4444)
         }
         if segue.identifier == "ticketSellView"
         {

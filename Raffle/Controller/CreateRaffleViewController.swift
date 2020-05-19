@@ -48,7 +48,7 @@ class CreateRaffleViewController: UIViewController, UIImagePickerControllerDeleg
         _ = Int32(ticketPerCustomer.text!)
         
         let database : SQLiteDatabase = SQLiteDatabase(databaseName: "MyDatabase")
-        database.insert(raffle:Raffle(name:raffleName, price:ticketPrice, description:raffleDescription, prize:rafflePrize, ticketNumber:totalTicketNumber, currentTicketNumber:0))
+        database.insert(raffle:Raffle(name:raffleName, price:ticketPrice, description:raffleDescription, prize:rafflePrize, ticketNumber:totalTicketNumber, currentTicketNumber:0, winnerOfRaffle: nil))
         
     }
     

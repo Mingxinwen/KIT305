@@ -359,7 +359,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Draw winner"/>
                                 <connections>
-                                    <segue destination="Q5H-gN-Mti" kind="show" id="gJk-d6-bQV"/>
+                                    <segue destination="Q5H-gN-Mti" kind="show" identifier="ticketUITableView" id="gJk-d6-bQV"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -589,7 +589,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OFc-Q0-LKM">
-                                <rect key="frame" x="59" y="463" width="52" height="24"/>
+                                <rect key="frame" x="59" y="551" width="52" height="95"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="HyL-7J-Dbe"/>
                                 </constraints>

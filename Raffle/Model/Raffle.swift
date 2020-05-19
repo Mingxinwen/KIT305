@@ -18,5 +18,5 @@ var price:Int32
     var ticketNumber:Int32
     var currentTicketNumber:Int32
    // var numberOfwinner:Int32 // winner !=0,
-  //  var winnerOfRaffle: String// ticket number , customer number, customer phone and email
+    var winnerOfRaffle: String?// ticket number , customer number, customer phone and email
 }

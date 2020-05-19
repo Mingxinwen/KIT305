@@ -112,9 +112,9 @@ class TicketUITableViewController: UITableViewController, UIImagePickerControlle
             // output = responds(ticket: tick!)
             print(tick!)
             //update winner information
-         //   let database : SQLiteDatabase = SQLiteDatabase(databaseName: "MyDatabase")
-          //  database.insert(raffle:Raffle(name:"RaffleA", price:23, description:"noteA", prize:500, ticketNumber:100))
-          //  database.updateRaffle(ticket: Ticket())
+            let database : SQLiteDatabase = SQLiteDatabase(databaseName: "MyDatabase")
+           // database.insert(raffle:Raffle(name:"RaffleA", price:23, description:"noteA", prize:500, ticketNumber:100, currentTicketNumber: 3))
+            database.updateRaffle(winner:String(tick!.customerName), id:raffleIdFromPreviousView!)
            
         }else{
             let alert = UIAlertController(
