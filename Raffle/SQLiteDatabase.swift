@@ -26,7 +26,7 @@ class SQLiteDatabase
      
      WARNING: DOING THIS WILL WIPE YOUR DATA, unless you modify how updateDatabase() works.
      */
-    private let DATABASE_VERSION = 42
+    private let DATABASE_VERSION = 44
     
     
     
@@ -430,7 +430,8 @@ class SQLiteDatabase
     }
     
     func updateRaffle(winner:String, id:Int32){
-        let updateStatementQuery = "UPDATE Raffle SET winerOfRaffle = ? WHERE raffleID = ? "
+//        let updateStatementQuery = "UPDATE Raffle SET winerOfRaffle = ? WHERE raffleID = ? "
+        let updateStatementQuery = "UPDATE Raffle SET winnerOfRaffle = ? WHERE id = ? "
         updateWithQuery(updateStatementQuery,bindingFunction:
         { (updateStatement) in
             sqlite3_bind_text(updateStatement, 1, NSString(string:winner).utf8String, -1, nil)

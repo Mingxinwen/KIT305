@@ -41,7 +41,6 @@ class SellTicketUIViewController: UIViewController, UIImagePickerControllerDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         let database : SQLiteDatabase = SQLiteDatabase(databaseName: "MyDatabase")
-        
         tickets = database.selectAllTicket(raffleID: raffleIdFromTicketView!)
         print(tickets.count)
         currentTicketNumber = Int32(tickets.count)
