@@ -12,13 +12,14 @@ class TicketUITableViewController: UITableViewController, UIImagePickerControlle
     
     var tickets = [Ticket]()
     var raffleIdFromPreviousView: Int32?
+    var numberOfWinnerFromPreviousView: Int32?
     
     //testing
     override func viewDidLoad() {
         super.viewDidLoad()
         let database : SQLiteDatabase = SQLiteDatabase(databaseName: "MyDatabase")
         tickets = database.selectAllTicket(raffleID: raffleIdFromPreviousView!)
-        print(tickets.count)
+        print(numberOfWinnerFromPreviousView!)
         //        tickets = database.selectAllTicket(raffleID: 1)
     }
     

@@ -17,13 +17,15 @@ class RaffleDetailViewController: UIViewController {
     @IBOutlet var raffleId: UILabel!
     @IBOutlet var rafflePrize: UILabel!
     @IBOutlet var totalNumberOfTicket: UILabel!
-  
+    @IBOutlet var numberOfWinnerLabel: UILabel!
+    
     
     
     var raffleID: Int32!
     var ticketNumber: Int32!
     var currentTicketNumber: Int32!
     var ticketPrice: Int32!
+    var numberOfWinner: Int32!
     
 
     override func viewDidLoad()
@@ -41,7 +43,8 @@ class RaffleDetailViewController: UIViewController {
             ticketNumber = displayRaffle.ticketNumber
             currentTicketNumber = displayRaffle.currentTicketNumber
             ticketPrice = displayRaffle.price
-         
+            numberOfWinnerLabel.text = String(displayRaffle.numberOfWinner)
+            numberOfWinner = displayRaffle.numberOfWinner
     } }
   
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
@@ -50,7 +53,9 @@ class RaffleDetailViewController: UIViewController {
         {
             let nextScreen = segue.destination as! TicketUITableViewController
             nextScreen.raffleIdFromPreviousView = raffleID
-            print(4444)
+            nextScreen.numberOfWinnerFromPreviousView = numberOfWinner
+            
+            
         }
         if segue.identifier == "ticketSellView"
         {

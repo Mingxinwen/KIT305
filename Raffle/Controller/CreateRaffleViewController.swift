@@ -18,6 +18,8 @@ class CreateRaffleViewController: UIViewController, UIImagePickerControllerDeleg
     @IBOutlet var raffleType: UISwitch!
     @IBOutlet var createRaffleBtn: UIButton!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet var numberOfWinner: UITextField!
+    
     
     @IBOutlet var ticketPerCustomer: UITextField!
     var customerby: Int32? = nil
@@ -44,11 +46,13 @@ class CreateRaffleViewController: UIViewController, UIImagePickerControllerDeleg
         guard let totalTicketNumber = Int32(totalTicketNumber.text!) else{
             return
         }
+        guard let numberOfWinner = Int32(numberOfWinner.text!) else{
+            return
+        }
         
-        _ = Int32(ticketPerCustomer.text!)
         
         let database : SQLiteDatabase = SQLiteDatabase(databaseName: "MyDatabase")
-        database.insert(raffle:Raffle(name:raffleName, price:ticketPrice, description:raffleDescription, prize:rafflePrize, ticketNumber:totalTicketNumber, currentTicketNumber:0, winnerOfRaffle: nil))
+        database.insert(raffle:Raffle(name:raffleName, price:ticketPrice, description:raffleDescription, prize:rafflePrize, ticketNumber:totalTicketNumber, currentTicketNumber:0, winnerOfRaffle: nil, numberOfWinner: numberOfWinner))
         
     }
     
