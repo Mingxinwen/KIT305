@@ -13,7 +13,7 @@ class TicketUITableViewController: UITableViewController, UIImagePickerControlle
     var tickets = [Ticket]()
     var raffleIdFromPreviousView: Int32?
     var numberOfWinnerFromPreviousView: Int32?
-    
+    var numofwinner = 0
     //testing
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,20 +76,37 @@ class TicketUITableViewController: UITableViewController, UIImagePickerControlle
             let selectedTicket = tickets[indexPath.row]
             detailViewController.ticket = selectedTicket
         }
+        if segue.identifier == "ticketUITableView"
+        {
+            
+        }
     }
     
-    
+  
     func drawWinner() -> Ticket?{
-        if(tickets.count > 0){
-           
+        if(tickets.count > 0 && numofwinner < numberOfWinnerFromPreviousView!){
             let randomTicket = Int(arc4random_uniform(UInt32(tickets.count)))
-            
+            numofwinner = numofwinner + 1
             return tickets[randomTicket]
         }
         else{
+            
+             let winner = "The raffle already have \(numofwinner) winner \n No more winners!"
+            var alertController:UIAlertController?
+            alertController = UIAlertController(title: "Warring",
+                                                message: winner,
+                                                preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK",
+                                       style: UIAlertAction.Style.default )
+            
+            alertController?.addAction(action)
+            self.present(alertController!, animated: true,completion: nil)
             return nil
         }
+        
     }
+    
+    
     @IBAction func DrawingWinerButton(_ sender: Any) {
         let tick = drawWinner()
         let ticketNumber = tick?.ticketNumber

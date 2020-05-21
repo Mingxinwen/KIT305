@@ -101,12 +101,39 @@ class SellTicketUIViewController: UIViewController, UIImagePickerControllerDeleg
                ticketNumberLabel.text = arrayToString
             
             guard let customerName = customerName.text, !customerName.isEmpty else{
+                
+                var alertController:UIAlertController?
+                alertController = UIAlertController(title: "Warring",
+                                                    message: "Please enter customer name!",preferredStyle: .alert)
+                let action = UIAlertAction(title: "OK",
+                                           style: UIAlertAction.Style.default )
+                
+                alertController?.addAction(action)
+                self.present(alertController!, animated: true,completion: nil)
                        return
                    }
             guard let customerPhone = Int32(customerPhone.text!) else{
+                
+                var alertController:UIAlertController?
+                alertController = UIAlertController(title: "Warring",
+                                                    message: "Please enter customer phone number!",preferredStyle: .alert)
+                let action = UIAlertAction(title: "OK",
+                                           style: UIAlertAction.Style.default )
+                
+                alertController?.addAction(action)
+                self.present(alertController!, animated: true,completion: nil)
                        return
                    }
             guard let customerEmail = customerEmail.text, !customerEmail.isEmpty else{
+                
+                var alertController:UIAlertController?
+                alertController = UIAlertController(title: "Warring",
+                                                    message: "Please enter customer email!",preferredStyle: .alert)
+                let action = UIAlertAction(title: "OK",
+                                           style: UIAlertAction.Style.default )
+                
+                alertController?.addAction(action)
+                self.present(alertController!, animated: true,completion: nil)
                        return
                    }
             let database : SQLiteDatabase = SQLiteDatabase(databaseName: "MyDatabase");

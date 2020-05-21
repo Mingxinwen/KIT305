@@ -23,30 +23,88 @@ class CreateRaffleViewController: UIViewController, UIImagePickerControllerDeleg
     
     @IBOutlet var ticketPerCustomer: UITextField!
     var customerby: Int32? = nil
-   
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
     
     @IBAction func creatRaffleBtn(_ sender: UIButton) {
         guard let raffleName = raffleName.text, !raffleName.isEmpty else{
+            
+            var alertController:UIAlertController?
+            alertController = UIAlertController(title: "Warring",
+                                                message: "Please enter Raffle Name!",preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK",
+                                       style: UIAlertAction.Style.default )
+            
+            alertController?.addAction(action)
+            self.present(alertController!, animated: true,completion: nil)
+            
+            
+            
             return
         }
         guard let raffleDescription = raffleDescription.text, !raffleDescription.isEmpty else{
+            
+            var alertController:UIAlertController?
+            alertController = UIAlertController(title: "Warring",
+                                                message: "Please enter Raffle description!",preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK",
+                                       style: UIAlertAction.Style.default )
+            
+            alertController?.addAction(action)
+            self.present(alertController!, animated: true,completion: nil)
             return
         }
         guard let ticketPrice = Int32(ticketPrice.text!) else{
+            
+            var alertController:UIAlertController?
+            alertController = UIAlertController(title: "Warring",
+                                                message: "Please enter Ticket price!",preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK",
+                                       style: UIAlertAction.Style.default )
+            
+            alertController?.addAction(action)
+            self.present(alertController!, animated: true,completion: nil)
             return
         }
         guard let rafflePrize = Int32(rafflePrize.text!)else{
+            
+            var alertController:UIAlertController?
+            alertController = UIAlertController(title: "Warring",
+                                                message: "Please enter Raffle's prize!",preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK",
+                                       style: UIAlertAction.Style.default )
+            
+            alertController?.addAction(action)
+            self.present(alertController!, animated: true,completion: nil)
             return
         }
         guard let totalTicketNumber = Int32(totalTicketNumber.text!) else{
+            
+            var alertController:UIAlertController?
+            alertController = UIAlertController(title: "Warring",
+                                                message: "Please enter total of Ticket!",preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK",
+                                       style: UIAlertAction.Style.default )
+            
+            alertController?.addAction(action)
+            self.present(alertController!, animated: true,completion: nil)
             return
         }
         guard let numberOfWinner = Int32(numberOfWinner.text!) else{
+          
+            var alertController:UIAlertController?
+            alertController = UIAlertController(title: "Warring",
+                                                message: "Please enter number of winners!",preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK",
+                                       style: UIAlertAction.Style.default )
+            
+            alertController?.addAction(action)
+            self.present(alertController!, animated: true,completion: nil)
             return
         }
         
@@ -56,26 +114,26 @@ class CreateRaffleViewController: UIViewController, UIImagePickerControllerDeleg
         
     }
     
-   override func prepare(for segue: UIStoryboardSegue, sender: Any?){
-
-                  if segue.identifier == "GetTicketPerCustomerSegue"
-                  {
-                      let nextScreen = segue.destination as! SellTicketUIViewController
-                   nextScreen.ticketPerCustomerPrevious = customerby
-                  }
-
-              }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
+        
+        if segue.identifier == "GetTicketPerCustomerSegue"
+        {
+            let nextScreen = segue.destination as! SellTicketUIViewController
+            nextScreen.ticketPerCustomerPrevious = customerby
+        }
+        
+    }
     
     @IBAction func galleryButtonTapped(_ sender: UIButton) {
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
-                   print("Gallery availble")
-                   let imagePicker:UIImagePickerController = UIImagePickerController()
-                              imagePicker.delegate = self
-                              imagePicker.sourceType = .photoLibrary;
-                              imagePicker.allowsEditing = false
-                              
-                              self.present(imagePicker, animated: true, completion: nil)
-               }
+            print("Gallery availble")
+            let imagePicker:UIImagePickerController = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = .photoLibrary;
+            imagePicker.allowsEditing = false
+            
+            self.present(imagePicker, animated: true, completion: nil)
+        }
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -87,9 +145,9 @@ class CreateRaffleViewController: UIViewController, UIImagePickerControllerDeleg
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-                     dismiss(animated: true, completion: nil)
-                 }
-   
+        dismiss(animated: true, completion: nil)
+    }
+    
 }
 
 
