@@ -17,6 +17,13 @@ class RaffleDetailViewController: UIViewController {
     @IBOutlet var raffleId: UILabel!
     @IBOutlet var rafflePrize: UILabel!
     @IBOutlet var totalNumberOfTicket: UILabel!
+<<<<<<< Updated upstream
+=======
+    @IBOutlet var numberOfWinnerLabel: UILabel!
+    @IBOutlet var winnerLabel: UILabel!
+    
+    
+>>>>>>> Stashed changes
     
     var raffleID: Int32!
     var ticketNumber: Int32!
@@ -40,7 +47,14 @@ class RaffleDetailViewController: UIViewController {
             ticketNumber = displayRaffle.ticketNumber
             currentTicketNumber = displayRaffle.currentTicketNumber
             ticketPrice = displayRaffle.price
+<<<<<<< Updated upstream
          
+=======
+            numberOfWinnerLabel.text = String(displayRaffle.numberOfWinner)
+            numberOfWinner = displayRaffle.numberOfWinner
+            winnerLabel.text = displayRaffle.winnerOfRaffle!
+            print(displayRaffle.winnerOfRaffle!)
+>>>>>>> Stashed changes
     } }
   
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){

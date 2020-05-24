@@ -12,8 +12,15 @@ class TicketUITableViewController: UITableViewController {
     
     var tickets = [Ticket]()
     var raffleIdFromPreviousView: Int32?
+<<<<<<< Updated upstream
 
 //testing
+=======
+    var numberOfWinnerFromPreviousView: Int32?
+    var numofwinner = 0
+    var winnerinfor: String?
+    //testing
+>>>>>>> Stashed changes
     override func viewDidLoad() {
         super.viewDidLoad()
         let database : SQLiteDatabase = SQLiteDatabase(databaseName: "MyDatabase")
@@ -78,6 +85,7 @@ class TicketUITableViewController: UITableViewController {
     }
 
     
+<<<<<<< Updated upstream
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
@@ -93,6 +101,59 @@ class TicketUITableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
+=======
+  
+    func drawWinner() -> Ticket?{
+            let randomTicket = Int(arc4random_uniform(UInt32(tickets.count)))
+            numofwinner = numofwinner + 1
+            return tickets[randomTicket]
+    }
+    
+    @IBOutlet var DrawingWinnerLabel: UIBarButtonItem!
+    
+    @IBAction func DrawingWinerButton(_ sender: Any) {
+       
+        if(tickets.count > 0){
+            
+        while( numofwinner < numberOfWinnerFromPreviousView!){
+            let winnerTicket = drawWinner()
+            let ticketNumber = winnerTicket?.ticketNumber
+            let customerName = winnerTicket?.customerName
+            winnerinfor = winnerinfor! + " \n Ticket Number: \(ticketNumber!)\n customer name: \(customerName!)"
+        }
+//        print(winnerinfor!)
+        let alert = UIAlertController(
+            title: "Winner!",
+            message: winnerinfor,
+            preferredStyle: UIAlertController.Style.alert)
+        // add an action (button)
+        alert.addAction(UIAlertAction(
+            title: "Congratulation!",
+            style: UIAlertAction.Style.cancel,
+            handler: nil ))
+        // show the alertself.
+        present(alert, animated: true, completion: nil)
+        let database : SQLiteDatabase = SQLiteDatabase(databaseName: "MyDatabase")
+        database.updateRaffle(winner:String(winnerinfor!), id:raffleIdFromPreviousView!)
+        }else {
+
+                        let alert = UIAlertController(
+                            title: "Warring!",
+                            message: "No ticket to drawing!",
+                            preferredStyle: UIAlertController.Style.alert)
+                        // add an action (button)
+                        alert.addAction(UIAlertAction(
+                            title: "Check your raffle!",
+                            style: UIAlertAction.Style.cancel,
+                            handler: nil ))
+        }
+        
+        
+
+
+        
+        
+>>>>>>> Stashed changes
     }
     */
 

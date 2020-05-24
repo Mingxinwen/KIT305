@@ -26,7 +26,11 @@ class SQLiteDatabase
      
         WARNING: DOING THIS WILL WIPE YOUR DATA, unless you modify how updateDatabase() works.
      */
+<<<<<<< Updated upstream
     private let DATABASE_VERSION = 31
+=======
+    private let DATABASE_VERSION = 50
+>>>>>>> Stashed changes
     
     
     
@@ -412,6 +416,7 @@ createTableWithQuery(creatRafflesTableQuery, tableName: "Raffle")
     }
     
     func selectAllTicket(raffleID:Int32) -> [Ticket]
+<<<<<<< Updated upstream
        {
            var result = [Ticket]()
            let selectStatementQuery = "SELECT TICKETNUMBER, RAFFLEID, CUSTOMERNAME, CUSTOMERPHONE, CUSTOMEREMAIL FROM Ticket where raffleID = ?"
@@ -432,4 +437,35 @@ createTableWithQuery(creatRafflesTableQuery, tableName: "Raffle")
            return result
 
        }
+=======
+    {
+        var result = [Ticket]()
+        let selectStatementQuery = "SELECT TICKETNUMBER, RAFFLEID, CUSTOMERNAME, CUSTOMERPHONE, CUSTOMEREMAIL FROM Ticket where raffleID = ?"
+        
+        selectWithQuery(selectStatementQuery, eachRow: { (row) in
+            //create a ticket object from each result
+            let ticket = Ticket(
+                ticketNumber: sqlite3_column_int(row, 0),
+                raffleID: sqlite3_column_int(row, 1),
+                customerName:  String(cString:sqlite3_column_text(row, 2)),
+                customerPhone: sqlite3_column_int(row, 3),
+                customerEmail:  String(cString:sqlite3_column_text(row, 4))
+            )
+            //add it to the result array
+            result += [ticket]
+        },bindingFunction: {(selectStatement) in sqlite3_bind_int(selectStatement, 1, raffleID)
+        })
+        return result
+        
+    }
+    
+//    func deleteRaffle(raffle:Raffle)->Bool {
+//        let query = """
+//        DELETE FROM Raffle WHERE id=?
+//        """
+//        return insertWithQuery(query, bindingFunction: { (insertStatement) in
+//            sqlite3_bind_text(insertStatement, 1, NSString(string:raffle.ID).utf8String, -1, nil)
+//        })
+//    }
+>>>>>>> Stashed changes
 }
