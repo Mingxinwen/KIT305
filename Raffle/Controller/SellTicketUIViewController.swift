@@ -39,6 +39,7 @@ class SellTicketUIViewController: UIViewController, UIImagePickerControllerDeleg
     @IBOutlet var SellButton: UIButton!
     
     override func viewDidLoad() {
+        totalCostLabel.text = String(ticketPriceFromPreviousView!)
         super.viewDidLoad()
         let database : SQLiteDatabase = SQLiteDatabase(databaseName: "MyDatabase")
         tickets = database.selectAllTicket(raffleID: raffleIdFromTicketView!)
@@ -62,28 +63,29 @@ class SellTicketUIViewController: UIViewController, UIImagePickerControllerDeleg
     @IBAction func ticketStepper(_ sender: UIStepper) {
         ticketNumberFromStepper = Int32(sender.value + 1)
         
-        if( 4 > ticketNumberFromStepper) {
+//        if( 4 > ticketNumberFromStepper) {
             numberOfTicket.text = String(ticketNumberFromStepper)
                    //check total ticket number here
             totalCostLabel.text = String(ticketNumberFromStepper*ticketPriceFromPreviousView!)
             
-        }else{
-            let combined = " You only by\(4) Tickets"
-            let alert = UIAlertController(
-                        title: "Warring!",
-                        message: combined,
-                        preferredStyle: UIAlertController.Style.alert)
-            // add an action (button)
-            alert.addAction(UIAlertAction(
-                            title: "Try again!",
-                            style: UIAlertAction.Style.cancel,
-                            handler: nil ))
-            // show the alertself.
-            present(alert, animated: true, completion: nil)
-             //dismiss(animated: true, completion: nil)
-        }
+//        }else{
+//            let combined = " You only by\(4) Tickets"
+//            let alert = UIAlertController(
+//                        title: "Warring!",
+//                        message: combined,
+//                        preferredStyle: UIAlertController.Style.alert)
+//            // add an action (button)
+//            alert.addAction(UIAlertAction(
+//                            title: "Try again!",
+//                            style: UIAlertAction.Style.cancel,
+//                            handler: nil ))
+//            // show the alertself.
+//            present(alert, animated: true, completion: nil)
+//             //dismiss(animated: true, completion: nil)
+//        }
        
     }
+    
     
     @IBAction func sellTicket(_ sender: UIButton) {
         

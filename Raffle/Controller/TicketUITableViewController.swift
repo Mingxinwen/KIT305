@@ -106,6 +106,7 @@ class TicketUITableViewController: UITableViewController, UIImagePickerControlle
         
     }
     
+    @IBOutlet var DrawingWinnerLabel: UIBarButtonItem!
     
     @IBAction func DrawingWinerButton(_ sender: Any) {
         let tick = drawWinner()
