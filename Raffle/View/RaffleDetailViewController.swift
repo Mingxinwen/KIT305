@@ -20,6 +20,10 @@ class RaffleDetailViewController: UIViewController {
 <<<<<<< Updated upstream
 =======
     @IBOutlet var numberOfWinnerLabel: UILabel!
+<<<<<<< Updated upstream
+=======
+    @IBOutlet var winnerInforlabel: UITextView!
+>>>>>>> Stashed changes
     @IBOutlet var winnerLabel: UILabel!
     
     
@@ -29,12 +33,18 @@ class RaffleDetailViewController: UIViewController {
     var ticketNumber: Int32!
     var currentTicketNumber: Int32!
     var ticketPrice: Int32!
+<<<<<<< Updated upstream
+=======
+    var numberOfWinner: Int32!
+    var pastRaffleCheck: Bool!
+>>>>>>> Stashed changes
     
 
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
         if let displayRaffle = raffle
         {
             nameLabel.text = displayRaffle.name
@@ -52,10 +62,21 @@ class RaffleDetailViewController: UIViewController {
 =======
             numberOfWinnerLabel.text = String(displayRaffle.numberOfWinner)
             numberOfWinner = displayRaffle.numberOfWinner
+<<<<<<< Updated upstream
             winnerLabel.text = displayRaffle.winnerOfRaffle!
             print(displayRaffle.winnerOfRaffle!)
 >>>>>>> Stashed changes
     } }
+=======
+            winnerInforlabel.text = displayRaffle.winnerOfRaffle
+            pastRaffleCheck = displayRaffle.winnerOfRaffle!.isEmpty
+    }
+        if (pastRaffleCheck == true) {
+            winnerInforlabel.isHidden = true
+            winnerLabel.isHidden = true
+        }
+    }
+>>>>>>> Stashed changes
   
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
 

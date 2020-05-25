@@ -18,7 +18,11 @@ class TicketUITableViewController: UITableViewController {
 =======
     var numberOfWinnerFromPreviousView: Int32?
     var numofwinner = 0
+<<<<<<< Updated upstream
     var winnerinfor: String?
+=======
+    var winnerinfor: String = ""
+>>>>>>> Stashed changes
     //testing
 >>>>>>> Stashed changes
     override func viewDidLoad() {
@@ -86,6 +90,7 @@ class TicketUITableViewController: UITableViewController {
 
     
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
@@ -107,11 +112,36 @@ class TicketUITableViewController: UITableViewController {
             let randomTicket = Int(arc4random_uniform(UInt32(tickets.count)))
             numofwinner = numofwinner + 1
             return tickets[randomTicket]
+=======
+    
+    func drawWinner() -> Ticket?{
+        //        if(tickets.count > 0 && numofwinner < numberOfWinnerFromPreviousView!){
+        let randomTicket = Int(arc4random_uniform(UInt32(tickets.count)))
+        
+        return tickets[randomTicket]
+        
+        //        else{
+        //
+        //             let winner = "The raffle already have \(numofwinner) winner \n No more winners!"
+        //            var alertController:UIAlertController?
+        //            alertController = UIAlertController(title: "Warring",
+        //                                                message: winner,
+        //                                                preferredStyle: .alert)
+        //            let action = UIAlertAction(title: "OK",
+        //                                       style: UIAlertAction.Style.default )
+        //
+        //            alertController?.addAction(action)
+        //            self.present(alertController!, animated: true,completion: nil)
+        //            return nil
+        //        }
+        
+>>>>>>> Stashed changes
     }
     
     @IBOutlet var DrawingWinnerLabel: UIBarButtonItem!
     
     @IBAction func DrawingWinerButton(_ sender: Any) {
+<<<<<<< Updated upstream
        
         if(tickets.count > 0){
             
@@ -120,6 +150,59 @@ class TicketUITableViewController: UITableViewController {
             let ticketNumber = winnerTicket?.ticketNumber
             let customerName = winnerTicket?.customerName
             winnerinfor = winnerinfor! + " \n Ticket Number: \(ticketNumber!)\n customer name: \(customerName!)"
+=======
+        
+        if(tickets.count > 0){
+            
+            if (numofwinner < numberOfWinnerFromPreviousView!) {
+                
+                while (numofwinner < numberOfWinnerFromPreviousView!) {
+                    let winnerTicket = drawWinner()
+                    numofwinner = numofwinner + 1
+                    let ticketNumber = winnerTicket?.ticketNumber
+                    let customerName = winnerTicket?.customerName
+                    winnerinfor = winnerinfor + " \n Ticket Number:\(ticketNumber!)\n customer name:\(customerName!)"
+                }
+                
+                let alert = UIAlertController(
+                    title: "Winner!",
+                    message: winnerinfor,
+                    preferredStyle: UIAlertController.Style.alert)
+                // add an action (button)
+                alert.addAction(UIAlertAction(
+                    title: "Congratulation!",
+                    style: UIAlertAction.Style.cancel,
+                    handler: nil ))
+                // show the alertself.
+                present(alert, animated: true, completion: nil)
+                let database : SQLiteDatabase = SQLiteDatabase(databaseName: "MyDatabase")
+                // database.insert(raffle:Raffle(name:"RaffleA", price:23, description:"noteA", prize:500, ticketNumber:100, currentTicketNumber: 3))
+                database.updateRaffle(winner:String(winnerinfor), id:raffleIdFromPreviousView!)
+            }else{
+                let winner = "The raffle already have \(numofwinner) winner \n No more winners!"
+                var alertController:UIAlertController?
+                alertController = UIAlertController(title: "Warring",
+                                                    message: winner,
+                                                    preferredStyle: .alert)
+                let action = UIAlertAction(title: "OK",
+                                           style: UIAlertAction.Style.default )
+                
+                alertController?.addAction(action)
+                self.present(alertController!, animated: true,completion: nil)
+                
+                numofwinner = 0
+            }
+        }else{
+            let alert = UIAlertController(
+                title: "Warring!",
+                message: "No ticket to drawing!",
+                preferredStyle: UIAlertController.Style.alert)
+            // add an action (button)
+            alert.addAction(UIAlertAction(
+                title: "Check your raffle!",
+                style: UIAlertAction.Style.cancel,
+                handler: nil ))
+>>>>>>> Stashed changes
         }
 //        print(winnerinfor!)
         let alert = UIAlertController(
@@ -155,6 +238,7 @@ class TicketUITableViewController: UITableViewController {
         
 >>>>>>> Stashed changes
     }
+<<<<<<< Updated upstream
     */
 
     /*
@@ -194,4 +278,8 @@ class TicketUITableViewController: UITableViewController {
     }
     */
 
+=======
+    
+    
+>>>>>>> Stashed changes
 }
