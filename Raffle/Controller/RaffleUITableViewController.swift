@@ -20,11 +20,6 @@ class RaffleUITableViewController: UITableViewController {
     {
          super.viewDidLoad()
          let database : SQLiteDatabase = SQLiteDatabase(databaseName: "MyDatabase")
-//        database.insert(raffle:Raffle(name:"RaffleA", price:23, description:"noteA", prize:500, ticketNumber:100))
-//        database.insert(raffle:Raffle(name:"RaffleB", price:19, description:"NoteB", prize:600, ticketNumber:200))
-//          database.insertTicket(ticket:Ticket(ticketNumber:123, raffleID: 1, customerName:"Adams Smitch", customerPhone:0420782458, customerEmail:"emailaddress"))
-
-//        database.insertTicket(ticket:Ticket(raffleID: 2, customerName:"tony Smitch"))
         raffles = database.selectAllRaffles()
     }
 

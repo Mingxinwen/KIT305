@@ -18,6 +18,8 @@ class RaffleDetailViewController: UIViewController {
     @IBOutlet var rafflePrize: UILabel!
     @IBOutlet var totalNumberOfTicket: UILabel!
     @IBOutlet var numberOfWinnerLabel: UILabel!
+    @IBOutlet var winnerDetailLabel: UITextView!
+    @IBOutlet var winnerLabel: UILabel!
     
     
     
@@ -45,7 +47,15 @@ class RaffleDetailViewController: UIViewController {
             ticketPrice = displayRaffle.price
             numberOfWinnerLabel.text = String(displayRaffle.numberOfWinner)
             numberOfWinner = displayRaffle.numberOfWinner
-    } }
+            winnerDetailLabel.text = displayRaffle.winnerOfRaffle
+            if (displayRaffle.winnerOfRaffle!.isEmpty) {
+                winnerDetailLabel.isHidden = true
+                winnerLabel.isHidden = true
+            }
+        }
+        
+        }
+        
   
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
 

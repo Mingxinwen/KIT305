@@ -14,7 +14,8 @@ class TicketUITableViewController: UITableViewController, UIImagePickerControlle
     var raffleIdFromPreviousView: Int32?
     var numberOfWinnerFromPreviousView: Int32?
     var numofwinner = 0
-    //testing
+    var winnerinfor: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let database : SQLiteDatabase = SQLiteDatabase(databaseName: "MyDatabase")
@@ -82,71 +83,97 @@ class TicketUITableViewController: UITableViewController, UIImagePickerControlle
         }
     }
     
-  
+    
     func drawWinner() -> Ticket?{
-        if(tickets.count > 0 && numofwinner < numberOfWinnerFromPreviousView!){
-            let randomTicket = Int(arc4random_uniform(UInt32(tickets.count)))
-            numofwinner = numofwinner + 1
-            return tickets[randomTicket]
-        }
-        else{
-            
-             let winner = "The raffle already have \(numofwinner) winner \n No more winners!"
-            var alertController:UIAlertController?
-            alertController = UIAlertController(title: "Warring",
-                                                message: winner,
-                                                preferredStyle: .alert)
-            let action = UIAlertAction(title: "OK",
-                                       style: UIAlertAction.Style.default )
-            
-            alertController?.addAction(action)
-            self.present(alertController!, animated: true,completion: nil)
-            return nil
-        }
+        let randomTicket = Int(arc4random_uniform(UInt32(tickets.count)))
         
+        return tickets[randomTicket]
     }
     
     @IBOutlet var DrawingWinnerLabel: UIBarButtonItem!
     
+    
     @IBAction func DrawingWinerButton(_ sender: Any) {
-        let tick = drawWinner()
-        let ticketNumber = tick?.ticketNumber
-        let customerName = tick?.customerName
-        //        print(tick!)
-        if(tick != nil){
+        
+        if(tickets.count > 0){
             
-            let winner = " \n Ticket Number:\n \(ticketNumber!)\n customer name:\n \(customerName!)"
-            let alert = UIAlertController(
-                title: "Winner!",
-                message: winner,
-                preferredStyle: UIAlertController.Style.alert)
-            // add an action (button)
-            alert.addAction(UIAlertAction(
-                title: "Congratulation!",
-                style: UIAlertAction.Style.cancel,
-                handler: nil ))
-            // show the alertself.
-            present(alert, animated: true, completion: nil)
+            while( numofwinner < numberOfWinnerFromPreviousView!){
+                let winnerTicket = drawWinner()
+                let ticketNumber = winnerTicket?.ticketNumber
+                let customerName = winnerTicket?.customerName
+                winnerinfor = winnerinfor + " \n Ticket Number: \(ticketNumber!)\n customer name: \(customerName!)"
+                
+                if(tickets.count > 0){
+                    
+                    if (numofwinner < numberOfWinnerFromPreviousView!) {
+                        
+                        while (numofwinner < numberOfWinnerFromPreviousView!) {
+                            let winnerTicket = drawWinner()
+                            numofwinner = numofwinner + 1
+                            let ticketNumber = winnerTicket?.ticketNumber
+                            let customerName = winnerTicket?.customerName
+                            winnerinfor = winnerinfor + " \n Ticket Number:\(ticketNumber!)\n customer name:\(customerName!)"
+                        }
+                        
+                        let alert = UIAlertController(
+                            title: "Winner!",
+                            message: winnerinfor,
+                            preferredStyle: UIAlertController.Style.alert)
+                        // add an action (button)
+                        alert.addAction(UIAlertAction(
+                            title: "Congratulation!",
+                            style: UIAlertAction.Style.cancel,
+                            handler: nil ))
+                        // show the alertself.
+                        present(alert, animated: true, completion: nil)
+                        let database : SQLiteDatabase = SQLiteDatabase(databaseName: "MyDatabase")
+                        // database.insert(raffle:Raffle(name:"RaffleA", price:23, description:"noteA", prize:500, ticketNumber:100, currentTicketNumber: 3))
+                        database.updateRaffle(winner:String(winnerinfor), id:raffleIdFromPreviousView!)
+                    }else{
+                        let winner = "The raffle already have \(numofwinner) winner \n No more winners!"
+                        var alertController:UIAlertController?
+                        alertController = UIAlertController(title: "Warring",
+                                                            message: winner,
+                                                            preferredStyle: .alert)
+                        let action = UIAlertAction(title: "OK",
+                                                   style: UIAlertAction.Style.default )
+                        
+                        alertController?.addAction(action)
+                        self.present(alertController!, animated: true,completion: nil)
+                        
+                        numofwinner = 0
+                    }
+                }else{
+                    let alert = UIAlertController(
+                        title: "Warring!",
+                        message: "No ticket to drawing!",
+                        preferredStyle: UIAlertController.Style.alert)
+                    // add an action (button)
+                    alert.addAction(UIAlertAction(
+                        title: "Check your raffle!",
+                        style: UIAlertAction.Style.cancel,
+                        handler: nil ))
+                }
+                //        print(winnerinfor!)
+                let alert = UIAlertController(
+                    title: "Winner!",
+                    message: winnerinfor,
+                    preferredStyle: UIAlertController.Style.alert)
+                // add an action (button)
+                alert.addAction(UIAlertAction(
+                    title: "Congratulation!",
+                    style: UIAlertAction.Style.cancel,
+                    handler: nil ))
+                // show the alertself.
+                present(alert, animated: true, completion: nil)
+                let database : SQLiteDatabase = SQLiteDatabase(databaseName: "MyDatabase")
+                database.updateRaffle(winner:String(winnerinfor), id:raffleIdFromPreviousView!)
+            }
             
-            // output = responds(ticket: tick!)
-            print(tick!)
-            //update winner information
-            let database : SQLiteDatabase = SQLiteDatabase(databaseName: "MyDatabase")
-           // database.insert(raffle:Raffle(name:"RaffleA", price:23, description:"noteA", prize:500, ticketNumber:100, currentTicketNumber: 3))
-            database.updateRaffle(winner:String(tick!.customerName), id:raffleIdFromPreviousView!)
-           
-        }else{
-            let alert = UIAlertController(
-                title: "Warring!",
-                message: "No ticket to drawing!",
-                preferredStyle: UIAlertController.Style.alert)
-            // add an action (button)
-            alert.addAction(UIAlertAction(
-                title: "Check your raffle!",
-                style: UIAlertAction.Style.cancel,
-                handler: nil ))
+            
+            
+            
         }
         
     }
-    
 }
