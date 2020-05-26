@@ -20,8 +20,6 @@ class TicketUITableViewController: UITableViewController, UIImagePickerControlle
         super.viewDidLoad()
         let database : SQLiteDatabase = SQLiteDatabase(databaseName: "MyDatabase")
         tickets = database.selectAllTicket(raffleID: raffleIdFromPreviousView!)
-        print(numberOfWinnerFromPreviousView!)
-        //        tickets = database.selectAllTicket(raffleID: 1)
     }
     
     // MARK: - Table view data source

@@ -10,6 +10,8 @@ import UIKit
 
 class RaffleDetailViewController: UIViewController {
     var raffle : Raffle?
+    var tickets = [Ticket]()
+    
 
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var priceLable: UILabel!
@@ -28,6 +30,8 @@ class RaffleDetailViewController: UIViewController {
     var currentTicketNumber: Int32!
     var ticketPrice: Int32!
     var numberOfWinner: Int32!
+    var numofwinner = 0
+    var winnerinfor: String = ""
     
 
     override func viewDidLoad()
@@ -53,11 +57,59 @@ class RaffleDetailViewController: UIViewController {
                 winnerDetailLabel.isHidden = true
                 winnerLabel.isHidden = true
             }
+            
+        let database : SQLiteDatabase = SQLiteDatabase(databaseName: "MyDatabase")
+        tickets = database.selectAllTicket(raffleID: raffleID)
+        print(tickets)
         }
         
         }
+    
+    func drawWinner() -> Ticket?{
+        let randomTicket = Int(arc4random_uniform(UInt32(tickets.count)))
         
-  
+        return tickets[randomTicket]
+    }
+        
+    @IBAction func DrawingWinner(_ sender: UIButton) {
+        if(tickets.count == 0){
+            var alertController:UIAlertController?
+            alertController = UIAlertController(title: "Warring",
+                                                message: "There is not ticket to draw winners!",preferredStyle: .alert)
+            let action = UIAlertAction(title: "Create your ticket first!",
+                                       style: UIAlertAction.Style.default )
+            
+            alertController?.addAction(action)
+            self.present(alertController!, animated: true,completion: nil)
+            return
+        }else if(tickets.count < numberOfWinner){
+            var alertController:UIAlertController?
+            alertController = UIAlertController(title: "Warring",
+                                                message: "You don't have enough ticket to draw winners!",preferredStyle: .alert)
+            let action = UIAlertAction(title: "Create more tickets first!",
+                                       style: UIAlertAction.Style.default )
+            
+            alertController?.addAction(action)
+            self.present(alertController!, animated: true,completion: nil)
+            return
+        }
+        
+        if (numofwinner < numberOfWinner) {
+        
+        while (numofwinner < numberOfWinner) {
+            let winnerTicket = drawWinner()
+            numofwinner = numofwinner + 1
+            let ticketNumber = winnerTicket?.ticketNumber
+            let customerName = winnerTicket?.customerName
+            winnerinfor = winnerinfor + " \n Ticket Number:\(ticketNumber!)\n customer name:\(customerName!)"
+        }
+        let database : SQLiteDatabase = SQLiteDatabase(databaseName: "MyDatabase")
+        database.updateRaffle(winner:String(winnerinfor), id:raffleID)
+        }
+        
+        
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
 
         if segue.identifier == "ticketUITableView"
@@ -74,6 +126,12 @@ class RaffleDetailViewController: UIViewController {
             nextScreen.raffleIdFromTicketView = raffleID
             nextScreen.ticketNumberFromPreviousView = ticketNumber
             nextScreen.ticketPriceFromPreviousView = ticketPrice
+        }
+        
+        if segue.identifier == "drawingWinnerView"
+        {
+            let nextScreen = segue.destination as! WinnerViewController
+            nextScreen.winnersDetailFromPreviousPage = winnerinfor
         }
 
     }
