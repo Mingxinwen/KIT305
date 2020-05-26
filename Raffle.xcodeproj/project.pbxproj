@@ -107,7 +107,6 @@
 			isa = PBXGroup;
 			children = (
 				33E0032424440277002954BE /* Main.storyboard */,
-				33B233C02445B29100F9FCB9 /* RaffleDetailViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -115,6 +114,7 @@
 		33E003342444032C002954BE /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				33B233C02445B29100F9FCB9 /* RaffleDetailViewController.swift */,
 				1FD3D43D244D8E9400C455DD /* TicketDetailViewController.swift */,
 				33B541DC24455CA100D747DD /* RaffleUITableViewController.swift */,
 				1FD3D435244C78BE00C455DD /* TicketUITableViewController.swift */,

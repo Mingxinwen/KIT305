@@ -20,7 +20,7 @@ class RaffleDetailViewController: UIViewController {
     @IBOutlet var numberOfWinnerLabel: UILabel!
     @IBOutlet var winnerDetailLabel: UITextView!
     @IBOutlet var winnerLabel: UILabel!
-    
+    @IBOutlet var navigationbar: UINavigationItem!
     
     
     var raffleID: Int32!
@@ -48,7 +48,8 @@ class RaffleDetailViewController: UIViewController {
             numberOfWinnerLabel.text = String(displayRaffle.numberOfWinner)
             numberOfWinner = displayRaffle.numberOfWinner
             winnerDetailLabel.text = displayRaffle.winnerOfRaffle
-            if (displayRaffle.winnerOfRaffle!.isEmpty) {
+//            if (displayRaffle.winnerOfRaffle!.isEmpty) {
+             if (displayRaffle.winnerOfRaffle!.isEmpty) {
                 winnerDetailLabel.isHidden = true
                 winnerLabel.isHidden = true
             }

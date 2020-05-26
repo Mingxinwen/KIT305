@@ -101,7 +101,7 @@ class TicketUITableViewController: UITableViewController, UIImagePickerControlle
                 let winnerTicket = drawWinner()
                 let ticketNumber = winnerTicket?.ticketNumber
                 let customerName = winnerTicket?.customerName
-                winnerinfor = winnerinfor + " \n Ticket Number: \(ticketNumber!)\n customer name: \(customerName!)"
+                winnerinfor = winnerinfor + " \n Ticket Number: \(ticketNumber!)\n Customer Name: \(customerName!)"
                 
                 if(tickets.count > 0){
                     
