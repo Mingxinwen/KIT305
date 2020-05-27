@@ -20,6 +20,7 @@ class TicketUITableViewController: UITableViewController, UIImagePickerControlle
         super.viewDidLoad()
         let database : SQLiteDatabase = SQLiteDatabase(databaseName: "MyDatabase")
         tickets = database.selectAllTicket(raffleID: raffleIdFromPreviousView!)
+
     }
     
     // MARK: - Table view data source
@@ -45,6 +46,8 @@ class TicketUITableViewController: UITableViewController, UIImagePickerControlle
         {
             ticketleCell.CustomerNameLabel.text = ticket.customerName
             ticketleCell.TicketNumberLabel.text = String(ticket.ticketNumber)
+            ticketleCell.CustomerPhoneLabel.text = String(ticket.customerPhone)
+            ticketleCell.CustomerEmail.text = ticket.customerEmail
             
         }
         
@@ -57,9 +60,7 @@ class TicketUITableViewController: UITableViewController, UIImagePickerControlle
     {
         super.prepare(for: segue, sender: sender)
         if segue.identifier == "ShowTicketDetailSegue"
-            
-            //"Showdetailsegue"
-            //"ShowRaffleDetailSegue"
+        
         {
             guard let detailViewController = segue.destination as? TicketDetailViewController else
             {
@@ -74,10 +75,6 @@ class TicketUITableViewController: UITableViewController, UIImagePickerControlle
                 fatalError("The selected cell is not being displayed by the table") }
             let selectedTicket = tickets[indexPath.row]
             detailViewController.ticket = selectedTicket
-        }
-        if segue.identifier == "ticketUITableView"
-        {
-            
         }
     }
     

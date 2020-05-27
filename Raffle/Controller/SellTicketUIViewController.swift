@@ -88,7 +88,6 @@ class SellTicketUIViewController: UIViewController, UIImagePickerControllerDeleg
     
     
     @IBAction func sellTicket(_ sender: UIButton) {
-        newTicketNumber = currentTicketNumber + ticketNumberFromStepper
         guard let customerName = customerName.text, !customerName.isEmpty else{
             
             var alertController:UIAlertController?
@@ -125,7 +124,7 @@ class SellTicketUIViewController: UIViewController, UIImagePickerControllerDeleg
             self.present(alertController!, animated: true,completion: nil)
                    return
                }
-        
+        newTicketNumber = currentTicketNumber + ticketNumberFromStepper
         if (newTicketNumber <= ticketNumberFromPreviousView!){
             let myInt1 = (numberOfTicket.text! as NSString).integerValue
             for u in 1...(myInt1)  {
@@ -143,6 +142,7 @@ class SellTicketUIViewController: UIViewController, UIImagePickerControllerDeleg
                 database.insertTicket(ticket:Ticket(ticketNumber:Int32(i), raffleID: raffleIdFromTicketView!, customerName:customerName, customerPhone:customerPhone, customerEmail:customerEmail))
             }
             
+            
             let combined = "Ticket Number:\n \(arrayToString!)"
                    
                    let alert = UIAlertController(
@@ -156,7 +156,9 @@ class SellTicketUIViewController: UIViewController, UIImagePickerControllerDeleg
                                    handler: nil ))
                    // show the alertself.
                    present(alert, animated: true, completion: nil)
-                   SellButton.isHidden = true
+            currentTicketNumber = newTicketNumber
+            arrayTicketNumber = []
+                   
         }else{
         let combined = " Only \(ticketNumberFromPreviousView - currentTicketNumber)Ticket left"
         let alert = UIAlertController(
