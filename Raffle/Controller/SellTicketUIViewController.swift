@@ -157,6 +157,9 @@ class SellTicketUIViewController: UIViewController, UIImagePickerControllerDeleg
                    // show the alertself.
                    present(alert, animated: true, completion: nil)
                    SellButton.isHidden = true
+            self.customerName.text?.removeAll()
+            self.customerPhone.text?.removeAll()
+            self.customerEmail.text?.removeAll()
         }else{
         let combined = " Only \(ticketNumberFromPreviousView - currentTicketNumber)Ticket left"
         let alert = UIAlertController(
