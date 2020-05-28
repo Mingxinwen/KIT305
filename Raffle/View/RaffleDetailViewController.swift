@@ -103,7 +103,7 @@ class RaffleDetailViewController: UIViewController {
             let customerName = winnerTicket?.customerName
             let customerPhone = winnerTicket?.customerPhone
             let customerEmail = winnerTicket?.customerEmail
-            winnerinfor = winnerinfor + " \n Ticket Number:\(ticketNumber!) \n Customer Name:\(customerName!) \n Phone Number:\(customerPhone!) \n Email: \(customerEmail!)"
+            winnerinfor = winnerinfor + " \n Ticket Number:\(ticketNumber!) Customer Name:\(customerName!) \n Phone Number:\(customerPhone!) Email: \(customerEmail!)"
         }
         let database : SQLiteDatabase = SQLiteDatabase(databaseName: "MyDatabase")
         database.updateRaffle(winner:String(winnerinfor), id:raffleID)
