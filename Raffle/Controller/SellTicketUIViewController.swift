@@ -125,7 +125,7 @@ class SellTicketUIViewController: UIViewController, UIImagePickerControllerDeleg
             self.present(alertController!, animated: true,completion: nil)
                    return
                }
-        
+        newTicketNumber = currentTicketNumber + ticketNumberFromStepper
         if (newTicketNumber <= ticketNumberFromPreviousView!){
             let myInt1 = (numberOfTicket.text! as NSString).integerValue
             for u in 1...(myInt1)  {
