@@ -14,13 +14,7 @@ class RaffleUITableViewController: UITableViewController {
     @IBOutlet var searchBar: UISearchBar!
     var searchRaffle = [Raffle]()
     var searching = false
-    var refresher: UIRefreshControl!
-    
-    @IBAction func refresh(_ sender: UIButton) {
-        dataload()
-    }
-    
-    
+
     override func viewDidLoad()
     {
          super.viewDidLoad()

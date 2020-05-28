@@ -88,7 +88,6 @@ class SellTicketUIViewController: UIViewController, UIImagePickerControllerDeleg
     
     
     @IBAction func sellTicket(_ sender: UIButton) {
-        newTicketNumber = currentTicketNumber + ticketNumberFromStepper
         guard let customerName = customerName.text, !customerName.isEmpty else{
             
             var alertController:UIAlertController?
@@ -142,6 +141,7 @@ class SellTicketUIViewController: UIViewController, UIImagePickerControllerDeleg
             for i in arrayTicketNumber {
                 database.insertTicket(ticket:Ticket(ticketNumber:Int32(i), raffleID: raffleIdFromTicketView!, customerName:customerName, customerPhone:customerPhone, customerEmail:customerEmail))
             }
+            
             
             let combined = "Ticket Number:\n \(arrayToString!)"
                    

@@ -12,6 +12,8 @@ class TicketUITableViewCell: UITableViewCell {
     
     @IBOutlet var CustomerNameLabel: UILabel!
     @IBOutlet var TicketNumberLabel: UILabel!
+    @IBOutlet var CustomerPhoneLabel: UILabel!
+    @IBOutlet var CustomerEmail: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
