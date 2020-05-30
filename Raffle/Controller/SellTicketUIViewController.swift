@@ -151,15 +151,17 @@ class SellTicketUIViewController: UIViewController, UIImagePickerControllerDeleg
                                preferredStyle: UIAlertController.Style.alert)
                    // add an action (button)
                    alert.addAction(UIAlertAction(
-                                   title: "Good Luck!",
+                                   title: "Sell more here!",
                                    style: UIAlertAction.Style.cancel,
                                    handler: nil ))
                    // show the alertself.
                    present(alert, animated: true, completion: nil)
-                   SellButton.isHidden = true
+                   
             self.customerName.text?.removeAll()
             self.customerPhone.text?.removeAll()
             self.customerEmail.text?.removeAll()
+            currentTicketNumber = newTicketNumber
+            arrayTicketNumber = []
         }else{
         let combined = " Only \(ticketNumberFromPreviousView - currentTicketNumber)Ticket left"
         let alert = UIAlertController(
